@@ -1,0 +1,37 @@
+Class A1
+   size=1 align=1
+   base size=0 base align=1
+A1 (0x24c7fc0) 0 empty
+
+Class B1
+   size=1 align=1
+   base size=1 base align=1
+B1 (0x1d33ac0) 0 empty
+  A1 (0x24ca000) 0 empty
+
+Vtable for A2
+A2::_ZTV2A2: 3u entries
+0     (int (*)(...))0
+4     (int (*)(...))(& _ZTI2A2)
+8     A2::foo
+
+Class A2
+   size=4 align=4
+   base size=4 base align=4
+A2 (0x24ca038) 0 nearly-empty
+    vptr=((& A2::_ZTV2A2) + 8u)
+
+Vtable for B2
+B2::_ZTV2B2: 3u entries
+0     (int (*)(...))0
+4     (int (*)(...))(& _ZTI2B2)
+8     B2::foo
+
+Class B2
+   size=4 align=4
+   base size=4 base align=4
+B2 (0x1d33c00) 0 nearly-empty
+    vptr=((& B2::_ZTV2B2) + 8u)
+  A2 (0x24ca2a0) 0 nearly-empty
+      primary-for B2 (0x1d33c00)
+

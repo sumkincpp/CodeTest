@@ -1,0 +1,8 @@
+vtable.cpp - файл с виртуальными функциями
+vtable.cpp.002t.class - дамп выравнивания классов в памяти с использованием vtable
+
+-1. gcc -fdump-class-hierarchy vtable.cpp - дамп виртуальных таблиц с оверхедом
+0. gcc -fdump-tree-all vtable.cpp - дамп всей доступной информации
+1. gcc -fdump-rtl-all-all vtable.cpp
+
+По-видимому gcc всегда добавляет по 4 байта на таблицу виртуальных функций - т.е. размер указателя
