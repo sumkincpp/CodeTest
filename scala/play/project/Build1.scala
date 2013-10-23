@@ -1,3 +1,4 @@
+//   * https://github.com/akka/apps/tree/master/akka-cluster-testapp
 import sbt._
 import sbt.Keys._
 import akka.sbt.AkkaKernelPlugin
