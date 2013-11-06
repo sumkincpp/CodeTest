@@ -1,0 +1,3 @@
+# Compiling with Visual Studio -->
+
+cl /EHsc /nologo /W4 purr.cpp
