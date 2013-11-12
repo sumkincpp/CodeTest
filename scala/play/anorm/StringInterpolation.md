@@ -13,7 +13,7 @@ Here, the syntaxis is more concise, and every parameter value is next to its nam
 
 I think it would be nice to get this functionality for next versions of Play, but for now I have implemented the code below. My intention is to share this tip and if anybody knows how to improve it, please do it. I'm a newbe in scala and the algorithm is very simple but probably it could be more efficient (maybe using iterators instead of zip function for getting the query).
 
-```
+```scala
 object AnormHelpers {
 
   implicit class AnormHelper (val sc: StringContext) extends AnyVal {
@@ -45,7 +45,7 @@ def SQLt (args: Any*) = {
 
 And even more, for example, to support the IN clause:
 
-```
+```scala
 def SQLin (args: Any*) = {
   // Matches every argument to an arbitrary name -> ("p0", value0), ("p1", value1), ...
   val params = args.zipWithIndex.map {
@@ -69,7 +69,7 @@ def SQLin (args: Any*) = {
 
 And you can use it:
 
-```
+```scala
 val carIds = List(1, 3, 5)
 SQLin"select * from car where id in ($carIds)".as(Car.simple *)
 ```
