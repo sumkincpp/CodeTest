@@ -32,7 +32,7 @@ object AnormHelpers {
 
 In addition, it's also possible to customize a bit more to trim and eliminates multiple spaces in any String value (don't use for passwords, for example):
 
-```
+```scala
 def SQLt (args: Any*) = {
   val params = args.zipWithIndex.map {
     case (arg: String, index) => ("p"+index, arg.trim.replaceAll("\\s{2,}", " "))
