@@ -1,0 +1,24 @@
+import akka.actor._                                                                                                                                                                                                
+import akka.pattern._                                                                                                                                                                                              
+import scala.concurrent.duration._                                                                                                                                                                                 
+                                                                                                                                                                                                                   
+class Resolver(sel: ActorSelection) extends Actor with ActorLogging {                                                                                                                                              
+    import context.dispatcher                                                                                                                                                                                      
+                                                                                                                                                                                                                   
+    private case object Start                                                                                                                                                                                      
+    override def preStart() = self ! Start                                                                                                                                                                         
+                                                                                                                                                                                                                   
+    def receive = {                                                                                                                                                                                                
+        case Start => sel.resolveOne(5.seconds) pipeTo self                                                                                                                                                        
+        case ref: ActorRef => log.info("Success"); context.system.shutdown()                                                                                                                                       
+        case _: Status.Failure => log.info("Failure"); context.system.shutdown()                                                                                                                                   
+    }                                                                                                                                                                                                              
+}                                                                                                                                                                                                                  
+                                                                                                                                                                                                                   
+object Main extends App {                                                                                                                                                                                          
+    val system = ActorSystem("Remote")                                                                                                                                                                             
+    val sel = system.actorSelection("akka.tcp://sys@127.0.0.1:8080/user/phantom")                                                                                                                                  
+                                                                                                                                                                                                                   
+    system.actorOf(Props(classOf[Resolver], sel))                                                                                                                                                                  
+    system.awaitTermination()                                                                                                                                                                                      
+}
