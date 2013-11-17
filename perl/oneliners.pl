@@ -1,3 +1,7 @@
+#
+# http://www.theperlreview.com/Articles/v0i1/one-liners.pdf
+#
+
 # compare numbers with precision of 1%
 perl -e 'sub cmpf { @_=sort(@_); abs(1 - $_[0]/$_[1]) > 0.01; } print cmpf(1.02, 1)."\n";'
 
