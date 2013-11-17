@@ -1,2 +1,11 @@
 # compare numbers with precision of 1%
 perl -e 'sub cmpf { @_=sort(@_); abs(1 - $_[0]/$_[1]) > 0.01; } print cmpf(1.02, 1)."\n";'
+
+# (WIN) unique folder name
+ls | perl -ne "$s{$_}++||print"
+
+# (WIN) unique lines from file
+perl -ne "$s{$_}++||print" infile > outfile
+
+# (WIN) grep an unique list of folders with a patter <1>-<WE WANT TO EXTRACT THIS>-<2>
+ls | perl -ne " if ($_ =~ /- (.*?) -/ ) { $s{$1}++||print \"$1,\"; } "
