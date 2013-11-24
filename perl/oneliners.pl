@@ -13,3 +13,7 @@ perl -ne "$s{$_}++||print" infile > outfile
 
 # (WIN) grep an unique list of folders with a patter <1>-<WE WANT TO EXTRACT THIS>-<2>
 ls | perl -ne " if ($_ =~ /- (.*?) -/ ) { $s{$1}++||print \"$1,\"; } "
+
+# Base64 decode/encode perl oneliner
+perl -MMIME::Base64 -e 'print encode_base64("string_to_encode")'
+perl -MMIME::Base64 -e 'print decode_base64("string_to_decode")'
