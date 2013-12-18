@@ -17,3 +17,8 @@ ls | perl -ne " if ($_ =~ /- (.*?) -/ ) { $s{$1}++||print \"$1,\"; } "
 # Base64 decode/encode perl oneliner
 perl -MMIME::Base64 -e 'print encode_base64("string_to_encode")'
 perl -MMIME::Base64 -e 'print decode_base64("string_to_decode")'
+
+
+# Memory Leak
+perl -e 'my @arr; while(1){ my @a = (1..1000000); push(@arr, \@a); }'
+perl -e 'while(1){sub leak { my ($f, $b); $f = \$b; $b = \$f}; leak(); }'
