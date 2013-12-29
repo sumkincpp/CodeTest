@@ -1,3 +1,4 @@
+// https://gist.github.com/patriknw/8054187
 import akka.actor.Actor.Receive
 import akka.actor.ActorContext
 import akka.actor.ActorLogging
