@@ -1,0 +1,86 @@
+#!/bin/bash
+
+## Fill in name of program here.
+PROG="pi"
+PROG_PATH="/usr/local/bin" ## Not need, but sometimes helpful (if $PROG resides in /opt for example)
+PROG_ARGS="100000000" 
+PID_PATH="/var/run/"
+
+start() {
+    if [ -e "$PID_PATH/$PROG.pid" ]; then
+        ## Program is running, exit with error.
+        echo "Error! $PROG is currently running!" 1>&2
+        exit 1
+    else
+        ## Change from /dev/null to something like /var/log/$PROG if you want to save output.
+        $PROG_PATH/$PROG $PROG_ARGS 2>&1 >/dev/null &
+        pid=`ps ax | grep "pi $PROG_ARGS" | sed 's/^\([0-9]\{1,\}\).*/\1/g' | head -n 1`
+        echo "$PROG started ($pid)"
+        echo $pid > "$PID_PATH/$PROG.pid"
+    fi
+}
+
+status() {
+    if [ -e "$PID_PATH/$PROG.pid" ]; then
+        ## Program is running, so stop it
+        pid=`cat $PID_PATH/$PROG.pid`
+
+        if kill -s 0 $pid >/dev/null 2>&1
+        then
+            echo "$PROG is running ($pid)"
+        else
+            echo "$PROG crashed! ($pid)"                
+        fi
+    else
+        ## Program is not running, exit with error.
+        echo "Error! $PROG not started!" 1>&2
+        exit 1
+    fi
+}
+
+stop() {
+    if [ -e "$PID_PATH/$PROG.pid" ]; then
+        ## Program is running, so stop it
+        pid=`cat $PID_PATH/$PROG.pid`
+        kill $pid
+
+        rm "$PID_PATH/$PROG.pid"
+        
+        echo "$PROG stopped ($pid)"
+    else
+        ## Program is not running, exit with error.
+        echo "Error! $PROG not started!" 1>&2
+        exit 1
+    fi
+}
+
+## Check to see if we are running as root first.
+## Found at http://www.cyberciti.biz/tips/shell-root-user-check-script.html
+if [ "$(id -u)" != "0" ]; then
+    echo "This script must be run as root" 1>&2
+    exit 1
+fi
+
+case "$1" in
+    start)
+        start
+        exit 0
+    ;;
+    stop)
+        stop
+        exit 0
+    ;;
+    status)
+        status
+        exit 0
+    ;;
+    reload|restart|force-reload)
+        stop
+        start
+        exit 0
+    ;;
+    **)
+        echo "Usage: $0 {start|stop|status|reload}" 1>&2
+        exit 1
+    ;;
+esac
