@@ -8,3 +8,7 @@ LANG="ru_RU.UTF-8"; export LANG
 LC_CTYPE="ru_RU.UTF-8"; export LC_CTYPE
 LC_COLLATE="POSIX"; export LC_COLLATE
 LC_ALL="ru_RU.UTF-8"; export LC_ALL
+
+# Setting only correct encoding (so programs remain with english interface)
+
+LC_CTYPE="ru_RU.UTF-8"; export LC_CTYPE
