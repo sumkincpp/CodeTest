@@ -24,3 +24,11 @@ sub _filetype {
     return UNKNOWN;                         # Something else (like what?)
 
 }
+
+#------------------------------------------------------
+
+use 5.010;
+
+if (-r -w -x -o -d $file) {
+    print "My directory is readable, writable, and executable!\n";
+}
