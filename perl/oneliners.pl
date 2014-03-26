@@ -22,3 +22,6 @@ perl -MMIME::Base64 -e 'print decode_base64("string_to_decode")'
 # Memory Leak
 perl -e 'my @arr; while(1){ my @a = (1..1000000); push(@arr, \@a); }'
 perl -e 'while(1){sub leak { my ($f, $b); $f = \$b; $b = \$f}; leak(); }'
+
+# Simple replace - removing multiline comments 
+perl -i.bak -pe 's/\/\*.*?\*\///' $file
