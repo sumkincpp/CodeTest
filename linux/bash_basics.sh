@@ -30,5 +30,31 @@ for i in `ls /opt/Docs`; do echo $i; done;
 
 ls /opt/Docs | while read i; do echo $i; done;
 
+####################################################
+#
+# Printing/Iterating WHOLE ARRAY
+#
+####################################################
+
+ARR=(one two three)
+
+echo ${ARR[@]}
 
 ####################################################
+#
+# Joining ARRAY WITH SEPARATOR
+#
+####################################################
+
+function join { local IFS="$1"; shift; echo "$*"; }
+
+ARR=(one two three)
+
+RES=$(join "," ${ARR[@]})
+
+echo $RES
+# results on one,two,three
+
+####################################################
+
+
