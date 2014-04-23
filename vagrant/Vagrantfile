@@ -7,6 +7,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.network :forwarded_port, guest: 8080, host: 38080
 
   config.vm.synced_folder "C:/code", "/code"
+  
+  # Custom private ssh key (instead insecure_key one)
+  #config.ssh.private_key_path = '~/.ssh/id_rsa'
 
   config.vm.provider :virtualbox do |vb|
      # Don't boot with headless mode
