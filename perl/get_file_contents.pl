@@ -8,9 +8,10 @@ sub get_file_contents
 {
   local $/ = undef; # It's a slurp mode, so we rea not by line, but whole file
   open my $fh, "<", $_[0] 
-      or die "could not open $file: $!";
+      or die "could not open $_[0]: $!";
   my $res = <$fh>;
   close $fh;  
+  $res;
 }
 
 # also,
