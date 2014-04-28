@@ -1,0 +1,5 @@
+R1#show clock
+*00:06:24.299 UTC Fri Mar 1 2002
+R1#show clock detail
+*00:06:26.599 UTC Fri Mar 1 2002
+No time source
