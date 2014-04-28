@@ -1,0 +1,40 @@
+csr100vf#dir tmpsys:lib/tcl/
+Directory of tmpsys:lib/tcl/
+
+   49  -r--            19354                    <no date>  auto.tcl
+   59  -r--             2695                    <no date>  base.tcl
+   61  -r--             9371                    <no date>  base64.tcl
+   62  -r--            16923                    <no date>  cli_lib.tcl
+   63  -r--             2589                    <no date>  context_lib.tcl
+    3  drw-                0                    <no date>  eem_scripts
+   66  -r--              185                    <no date>  email_template_cfg.tm
+   67  -r--              147                    <no date>  email_template_chs.tm
+   68  -r--              154                    <no date>  email_template_cmd.tm
+   69  -r--              156                    <no date>  email_template_dmp.tm
+   70  -r--              144                    <no date>  email_template_sl.tm
+   71  -r--              325                    <no date>  email_template_sm.tm
+   72  -r--              135                    <no date>  email_template_wd.tm
+   50  -r--             9183                    <no date>  history.tcl
+   51  -r--            23558                    <no date>  http.tcl
+   55  -r--            17985                    <no date>  init.tcl
+   57  -r--             6980                    <no date>  ldAout.tcl
+   60  -r--            33266                    <no date>  optparse.tcl
+   52  -r--            19463                    <no date>  package.tcl
+   56  -r--             1062                    <no date>  parray.tcl
+   65  -r--             4823                    <no date>  parse_lib.tcl
+   53  -r--            34061                    <no date>  safe.tcl
+   64  -r--            13750                    <no date>  smtp_lib.tcl
+   58  -r--            14838                    <no date>  tclIndex
+   54  -r--             4547                    <no date>  word.tcl
+
+No space information available
+csr100vf#dir tmpsys:lib/tcl/eem_scripts
+Directory of tmpsys:lib/tcl/eem_scripts/
+
+   12  -r--             7458                    <no date>  ap_perf_test_base_cpu.tcl
+   16  -r--            19119                    <no date>  cl_show_eem_tech.tcl
+   11  -r--             3327                    <no date>  no_perf_test_init.tcl
+   13  -r--             4245                    <no date>  sl_intf_down.tcl
+   10  -r--             6112                    <no date>  tm_cli_cmd.tcl
+   14  -r--             8271                    <no date>  tm_crash_reporter.tcl
+   15  -r--             5464                    <no date>  tm_fsys_usage.tcl
