@@ -1,0 +1,64 @@
+R1#show parser dump interface | include ip address
+0 no ip address negotiated previous
+0 no ip address negotiated
+0 no ip address pool <string>
+0 no ip address <address> <address> secondary
+0 no ip address <address> <address>
+0 no ip address
+0 no ip address
+0 no ip address dhcp client-id <interface> hostname <string>
+0 no ip address dhcp client-id <interface>
+0 no ip address dhcp
+0 no ip address
+0 no ip address dhcp
+0 no ip address
+0 no ip address dynamic
+0 no ip address
+0 no ip address docsis
+0 no service-module external ip address
+0 no service-module ip address
+0 no service-module ip address
+0 no peer ip address forced
+0 no peer default ip address
+0 default ip address negotiated previous
+0 default ip address negotiated
+0 default ip address pool <string>
+0 default ip address <address> <address> secondary
+0 default ip address <address> <address>
+0 default ip address
+0 default ip address
+0 default ip address dhcp client-id <interface> hostname <string>
+0 default ip address dhcp client-id <interface>
+0 default ip address dhcp
+0 default ip address
+0 default ip address dhcp
+0 default ip address
+0 default ip address dynamic
+0 default ip address
+0 default ip address docsis
+0 default service-module external ip address
+0 default service-module ip address
+0 default service-module ip address
+0 default peer ip address forced
+0 default peer default ip address
+15 ip address negotiated previous
+15 ip address negotiated
+15 ip address pool <string>
+15 ip address <address> <address> secondary
+15 ip address <address> <address>
+15 ip address
+15 ip address
+15 ip address dhcp client-id <interface> hostname <string>
+15 ip address dhcp client-id <interface>
+15 ip address dhcp
+15 ip address
+15 ip address dhcp
+15 ip address
+15 ip address dynamic
+15 ip address
+15 ip address docsis
+15 service-module external ip address
+15 service-module ip address
+15 service-module ip address
+15 peer ip address forced
+15 peer default ip address
