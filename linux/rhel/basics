@@ -1,0 +1,16 @@
+
+Stop the network interface eth0:
+
+    ifdown eth0 
+
+Start the network interface eth0:
+
+    ifup eth0 
+
+Don't confuse with the following command, which restarts all the networks services :
+
+    /etc/init.d/networking restart
+
+To see your various network interfaces, use the command:
+
+    /sbin/ifconfig -a
