@@ -1,0 +1,5 @@
+R1#show microcode
+Microcode images for downloadable hardware
+HW Type             Microcode image names
+------------------------------------------
+ceipnm   default    flash:/borabora_fw.bin
