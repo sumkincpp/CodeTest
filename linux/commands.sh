@@ -16,3 +16,6 @@ enscript -1rG --line-numbers -p - --highlight=javascript --color=0 -c untitled.j
 
 # Show PATH entries, one entry per line
 echo $PATH | tr : '\n'
+
+
+ssh-keygen -t rsa -C "blablabla@localhost"
