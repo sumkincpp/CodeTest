@@ -22,3 +22,7 @@ ssh-keygen -t rsa -C "blablabla@localhost"
 
 # Generate key fingerprint
 ssh-keygen -lf ~/.ssh/id_rsa.pub
+
+# Checking connection to repo
+ssh -vT git@github.com
+ssh -vT git@bitbucket.org
