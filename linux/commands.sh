@@ -19,3 +19,6 @@ echo $PATH | tr : '\n'
 
 
 ssh-keygen -t rsa -C "blablabla@localhost"
+
+# Generate key fingerprint
+ssh-keygen -lf ~/.ssh/id_rsa.pub
