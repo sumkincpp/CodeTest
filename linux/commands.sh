@@ -26,3 +26,6 @@ ssh-keygen -lf ~/.ssh/id_rsa.pub
 # Checking connection to repo
 ssh -vT git@github.com
 ssh -vT git@bitbucket.org
+
+mount -o loop disk.iso /mnt/disk
+umount /mnt/disk
