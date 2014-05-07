@@ -29,3 +29,6 @@ ssh -vT git@bitbucket.org
 
 mount -o loop disk.iso /mnt/disk
 umount /mnt/disk
+
+# Download full website copy from archive.org >
+wget -np -e robots=off --mirror --domains=staticweb.archive.org,web.archive.org http://web.archive.org/web/19970708161549/http://www.slackworks.com/
