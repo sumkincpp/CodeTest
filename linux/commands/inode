@@ -1,0 +1,11 @@
+#
+# ls - List all files with the same inode number? - Unix & Linux Stack Exchange
+# http://unix.stackexchange.com/questions/73538/list-all-files-with-the-same-inode-number
+#
+
+
+# Finding same file
+find -samefile /mount/point/your/file
+
+# Finding file with exact inode
+find -inum 12353538
