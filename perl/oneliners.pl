@@ -1,6 +1,15 @@
 #
 # http://www.theperlreview.com/Articles/v0i1/one-liners.pdf
 #
+# The top 10 tricks of Perl one-liners (Ksplice Blog) 
+# https://blogs.oracle.com/ksplice/entry/the_top_10_tricks_of
+#
+# command line - Perl flags -pe, -pi, -p, -w, -d, -i, -t? - Stack Overflow
+# http://stackoverflow.com/questions/6302025/perl-flags-pe-pi-p-w-d-i-t
+#
+# perlrun - perldoc.perl.org
+# http://perldoc.perl.org/perlrun.html
+#
 #
 # -n similar to sed -n or awk
 #  while (<>) {
