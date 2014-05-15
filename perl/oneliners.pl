@@ -1,6 +1,20 @@
 #
 # http://www.theperlreview.com/Articles/v0i1/one-liners.pdf
 #
+#
+# -n similar to sed -n or awk
+#  while (<>) {
+#    ... # your program goes here
+#  }
+#
+# -p flag ->
+#  while (<>) {
+#   # exec here 
+#  } 
+#  continue {
+#    print or die "-p destination: $!\n"; 
+#  }
+
 
 # compare numbers with precision of 1%
 perl -e 'sub cmpf { @_=sort(@_); abs(1 - $_[0]/$_[1]) > 0.01; } print cmpf(1.02, 1)."\n";'
