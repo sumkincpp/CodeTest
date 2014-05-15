@@ -25,3 +25,8 @@ perl -e 'while(1){sub leak { my ($f, $b); $f = \$b; $b = \$f}; leak(); }'
 
 # Simple replace - removing multiline comments 
 perl -i.bak -pe 's/\/\*.*?\*\///' $file
+
+# Substitution 
+cat test | perl -pe 's/word/second/'
+# remove trailing spaces in file
+cat test | perl -pe 's/\s*$//'
