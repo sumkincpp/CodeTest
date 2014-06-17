@@ -1,0 +1,5 @@
+export NSPR_LOG_MODULES=IMAP:4,SMTP:4 
+# or
+# export NSPR_LOG_MODULES=SMTP:4
+export NSPR_LOG_FILE=`pwd`/smtp.log
+thunderbird
