@@ -1,0 +1,16 @@
+###### service X does not support chkconfig
+
+1. Add directly at the top of the service (/etc/init.d/my_service) :
+
+# chkconfig: 2345 95 20
+# description: Some description
+# What your script does (not sure if this is necessary though)
+# processname: myscript
+
+2. Run :
+
+chkconfig –level 2345 myscript on
+
+3. Profit! :
+
+chkconfig
