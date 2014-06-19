@@ -1,0 +1,4 @@
+
+
+# Copying file from container to the host
+docker cp <containerId>:/file/path/within/container /host/path/target
