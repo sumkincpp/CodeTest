@@ -1,0 +1,3 @@
+
+
+LINK_DIRECTORIES( ${LINK_DIRECTORIES} /absPath/libtourtre/)
