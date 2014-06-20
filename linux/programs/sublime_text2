@@ -1,0 +1,6 @@
+Preferences -> Settings - Default/User
+Preferences -> Settings -> More -> Syntax Specific -> User
+{
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true
+}
