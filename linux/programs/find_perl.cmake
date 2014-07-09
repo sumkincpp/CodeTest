@@ -1,0 +1,37 @@
+find_package(PerlLibs)
+
+# Below code is for failure case, see more http://www.cmake.org/pipermail/cmake/2008-July/022638.html
+
+EXECUTE_PROCESS ( COMMAND ${PERL_EXECUTABLE}
+                  -MConfig -e "print \$Config{version}"
+                  OUTPUT_VARIABLE PERL_OUTPUT
+                  RESULT_VARIABLE PERL_RETURN_VALUE )
+IF ( NOT PERL_RETURN_VALUE )
+  SET ( PERL_VERSION ${PERL_OUTPUT} )
+ENDIF ( NOT PERL_RETURN_VALUE )
+
+## Try to fix failure in PERL_INCLUDE_PATH
+IF ( PERL_INCLUDE_PATH MATCHES .*-NOTFOUND )
+  EXECUTE_PROCESS ( COMMAND ${PERL_EXECUTABLE}
+                    -MConfig -e "print \$Config{archlibexp}"
+                    OUTPUT_VARIABLE PERL_OUTPUT
+                    RESULT_VARIABLE PERL_RETURN_VALUE )
+  IF ( NOT PERL_RETURN_VALUE )
+    FIND_PATH ( PERL_INCLUDE_PATH perl.h ${PERL_OUTPUT}/CORE )
+  ENDIF ( NOT PERL_RETURN_VALUE )
+ENDIF ( PERL_INCLUDE_PATH MATCHES .*-NOTFOUND )
+## Try to fix failure in PERL_LIBRARY
+IF ( PERL_LIBRARY MATCHES .*-NOTFOUND )
+  EXECUTE_PROCESS ( COMMAND ${PERL_EXECUTABLE}
+                    -MConfig -e "print \$Config{libperl}"
+                    OUTPUT_VARIABLE PERL_OUTPUT
+                    RESULT_VARIABLE PERL_RETURN_VALUE )
+  IF ( NOT PERL_RETURN_VALUE )
+    FIND_LIBRARY ( PERL_LIBRARY NAMES ${PERL_OUTPUT}
+                                PATHS ${PERL_INCLUDE_PATH} )
+  ENDIF ( NOT PERL_RETURN_VALUE )
+ENDIF ( PERL_LIBRARY MATCHES .*-NOTFOUND )
+MESSAGE ( STATUS "  PERL_VERSION:           " ${PERL_VERSION} )
+MESSAGE ( STATUS "  PERL_EXECUTABLE:        " ${PERL_EXECUTABLE} )
+MESSAGE ( STATUS "  PERL_INCLUDE_PATH:      " ${PERL_INCLUDE_PATH} )
+MESSAGE ( STATUS "  PERL_LIBRARY:           " ${PERL_LIBRARY} )
