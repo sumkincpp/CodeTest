@@ -1,0 +1,1 @@
+yum groupinstall "X Window System" "Desktop" "Desktop Platform"
