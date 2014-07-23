@@ -9,3 +9,6 @@ msconfig
 
 # Get list of currently listening services
 netstat -ano
+
+# Flush dat DNS-es!
+ipconfig /flushdns
