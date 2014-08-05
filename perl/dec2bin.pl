@@ -1,5 +1,7 @@
 #!/bin/perl
 
+# more nice converters > http://aerostitch.github.io/programming/perl/oneliners/perl_numbers_conversion.html
+
 foreach my $arg (@ARGV) {
 	my ($decimal, $binary) = ($arg, '');
 
