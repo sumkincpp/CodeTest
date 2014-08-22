@@ -27,4 +27,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     file.source      = '~/.gitconfig'
     file.destination = '/home/vagrant/.gitconfig'
   end
+  
+  config.vm.provision "docker" do |d|
+    d.build_image "/vagrant", args: "-t sumkincpp/ising" # building from roots(in /vagrant folder) Dockerfile
+    d.run "sumkincpp/ising" # used during vagrant up
+  end
 end
