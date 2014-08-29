@@ -11,3 +11,10 @@ grep -io 'bla' .
 # -I  - skip binaries, 
 # --exclude-dir="\.svn"
 grep -r --include=\*.{cpp,h} --exlclude="" piuu .
+
+# inverted match
+grep -v doc .
+
+# match aaa and bbb
+grep 'aaa\|bbb' .
+
