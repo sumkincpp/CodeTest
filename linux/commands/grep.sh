@@ -18,3 +18,6 @@ grep -v doc .
 # match aaa and bbb
 grep 'aaa\|bbb' .
 
+# extended regexp
+grep -E 'pattern1|pattern2' filename
+
