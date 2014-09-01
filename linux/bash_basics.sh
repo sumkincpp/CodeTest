@@ -71,3 +71,9 @@ for i in {1..10}; do echo $i; done
 
 $ date "+%T %d %b %Y"
 14:01:41 23 Apr 2014
+
+
+####################################################
+for f in `ls`; do
+  echo "File -> $f"
+done
