@@ -22,7 +22,12 @@ vagrant : vagrant wheel developers
 # Adding user
 useradd -G admins,developers jerry
 
-# USing id
+# Using `id`
 [root@vagrant-centos65 ~]# id vagrant
 uid=500(vagrant) gid=500(vagrant) groups=500(vagrant),10(wheel),502(developers)
 
+[root@vagrant-centos65 ~]# id -G vagrant
+500 10 502
+
+[root@vagrant-centos65 ~]# id -Gn vagrant
+vagrant wheel developers
