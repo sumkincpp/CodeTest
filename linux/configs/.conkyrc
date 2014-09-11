@@ -1,0 +1,75 @@
+background yes
+use_xft yes
+# xft font when Xft is enabled
+xftfont Sans:size=8
+# Text alpha when using Xft
+xftalpha 0.8
+
+own_window_class Conky
+own_window yes
+own_window_type conky
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+double_buffer yes
+use_spacer yes
+update_interval 1.0
+minimum_size 200
+maximum_width 200
+draw_shades no
+draw_outline no
+draw_borders no
+uppercase no
+stippled_borders 3
+border_margin 5
+border_width 2b0
+default_color white
+own_window_colour black
+own_window_transparent yes
+alignment top_right
+gap_x 5
+gap_y 30
+override_utf8_locale yes
+
+TEXT
+${font size=22}${color lightgrey}${alignc}${time %k:%M:%S}$color
+${font Asize=10}${color lightgrey}${alignc}${execi 1 date '+%A / %d.%m.%Y'}$color$font
+
+$sysname $alignr $kernel
+$alignr $nodename
+${color #FFA812}$uptime${color} $alignr $loadavg
+
+CPU0: ${alignr} ${cpu cpu0}%
+${color white}${cpubar cpu1 4}$color
+${freq}MHz ${alignr} Temp1: ${color yellow}${execi 2 sensors | grep 'temp1' | cut -c 14-21 | head -n 1}$color
+CPU1: ${alignr} ${cpu cpu1}%
+${color white}${cpubar cpu1 4}$color
+${freq}MHz ${alignr} Temp2: ${color yellow}${execi 2 sensors | grep 'temp2' | cut -c 14-21 | head -n 1}$color
+
+Swap: ${alignr} $swapperc%
+RAM: ${alignr} ${color white}${membar 4,150}$color 
+$mem / $memmax $alignr $memperc%
+
+${alignr} ${execi 2 hddtemp /dev/sda}
+/media/DATA ${alignr} ${fs_bar 4,100 /media/DATA}
+${fs_used_perc /media/DATA}% used ${alignr} ${fs_free /media/DATA} / ${fs_size /media/DATA}
+/media/ACER ${alignr} ${fs_bar 4,100 /media/ACER}
+${fs_used_perc /media/ACER}% used ${alignr} ${fs_free /media/ACER} / ${fs_size /media/ACER}
+/home ${alignr} ${fs_bar 4,100 /home}
+${fs_used_perc /home}% used ${alignr} ${fs_free /home} / ${fs_size /home}
+
+NAME          ${alignr} CPU%    MEM%
+${color a2a2a2}${hr}$color
+${color yellow}${top name 1} $alignr ${top cpu 1}    ${top mem 1} $color
+${top name 2} $alignr ${top cpu 2}    ${top mem 2} 
+${top name 3} $alignr ${top cpu 3}    ${top mem 3} 
+
+${if_existing /sys/class/net/wlan1/operstate up}IP (wlan1):$alignr${addr wlan1}
+Down: ${downspeed wlan1} k/s ${alignr}Up: ${upspeed wlan1} k/s
+${color lightgray}${downspeedgraph wlan1 20,80 444444 eeeeee} ${alignr}${upspeedgraph wlan1 20,80 444444 eeeeee}$color
+Total: ${totaldown wlan1} ${alignr}Total: ${totalup wlan1}
+${endif}${if_existing /sys/class/net/wlan0/operstate up}IP (wlan0):$alignr${addr wlan0}
+Down: ${downspeed wlan0} k/s ${alignr}Up: ${upspeed wlan0} k/s
+${color lightgray}${downspeedgraph wlan0 20,80 444444 eeeeee} ${alignr}${upspeedgraph wlan0 20,80 444444 eeeeee}$color
+Total: ${totaldown wlan0} ${alignr}Total: ${totalup wlan0}
+${endif}
+
