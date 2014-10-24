@@ -18,3 +18,9 @@ $ ps -eo size,pid,user,command --sort -size | awk '{ hr=$1/1024 ; printf("%13.2f
   0.00 Mb [rpciod/0]
   0.00 Mb [rpciod/1]
   0.00 Mb [sm_elasticsearc] <defunct>
+
+# Total memory usage for java (for example) processes
+$ ps -C java -O rss | gawk '{ count ++; sum += $2 }; END {count --; print "Number of processes =",count; print "Memory usage per process =",sum/1024/count, "MB"; print "Total memory usage =", sum/1024, "MB" ;};'
+Number of processes = 23
+Memory usage per process = 326.818 MB
+Total memory usage = 7516.8 MB
