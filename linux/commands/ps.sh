@@ -7,7 +7,7 @@ $ ps laj
     0 15454 15405   0  31  0  2432800    724 -      R+   s011    0:00.00 ps laj           root  15454      0    1
 
 # Sort by memory +human readable
-$ [root@apg64u1 APG]# ps -eo size,pid,user,command --sort -size | awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' | tail
+$ ps -eo size,pid,user,command --sort -size | awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' | tail
   0.00 Mb [ext4-dio-unwrit]
   0.00 Mb [kauditd]
   0.00 Mb [vmmemctl]
