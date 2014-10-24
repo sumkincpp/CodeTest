@@ -5,3 +5,16 @@ $ ps laj
   501 71802   643   0  31  0  2461328   1092 -      Ss+  s010    0:00.36 -/usr/local/bin/ fedor 71802      0    0
   501 15405   643   0  31  0  2453028   3748 -      Ss   s011    0:00.09 -/bin/bash       fedor 15405      0    0
     0 15454 15405   0  31  0  2432800    724 -      R+   s011    0:00.00 ps laj           root  15454      0    1
+
+# Sort by memory +human readable
+$ [root@apg64u1 APG]# ps -eo size,pid,user,command --sort -size | awk '{ hr=$1/1024 ; printf("%13.2f Mb ",hr) } { for ( x=4 ; x<=NF ; x++ ) { printf("%s ",$x) } print "" }' | tail
+  0.00 Mb [ext4-dio-unwrit]
+  0.00 Mb [kauditd]
+  0.00 Mb [vmmemctl]
+  0.00 Mb [jbd2/sda1-8]
+  0.00 Mb [ext4-dio-unwrit]
+  0.00 Mb [ext4-dio-unwrit]
+  0.00 Mb [flush-253:0]
+  0.00 Mb [rpciod/0]
+  0.00 Mb [rpciod/1]
+  0.00 Mb [sm_elasticsearc] <defunct>
