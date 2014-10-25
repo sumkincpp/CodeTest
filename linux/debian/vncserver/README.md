@@ -8,3 +8,7 @@ Done on debian 7
    * `mkdir -p /etc/vncserver && vi /etc/vncserver/vncservers.conf`
    * Configure /etc/vncserver/vncservers.conf
    * `service vncserver start`
+
+## Checking
+
+`netstat -alpn | grep :5901` or `telnet localhost 5901`
