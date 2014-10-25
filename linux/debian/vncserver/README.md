@@ -7,6 +7,7 @@ Done on debian 7
    * `update-rc.d vncserver defaults`
    * `mkdir -p /etc/vncserver && vi /etc/vncserver/vncservers.conf`
    * Configure /etc/vncserver/vncservers.conf
+   * Configure /root/.vnc/xstartup to run X session (i.e. gnome-session)
    * `service vncserver start`
 
 ## Checking
