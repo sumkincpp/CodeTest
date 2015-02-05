@@ -11,3 +11,13 @@ openssl dgst --help
 
 # verifying cert fields (in pem format)
 openssl x509 -noout -text -in verse.crt 
+
+# sha hashes
+> echo -n "abc" | openssl sha1 -binary | base64
+qZk+NkcGgWq6PiVxeFDCbJzQ2J0=
+
+> echo -n "abc" | openssl sha1
+(stdin)= a9993e364706816aba3e25717850c26c9cd0d89d
+
+> echo -n "abc" | openssl sha1 -sha256
+(stdin)= ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad
