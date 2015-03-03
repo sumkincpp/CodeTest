@@ -21,3 +21,5 @@ grep 'aaa\|bbb' .
 # extended regexp
 grep -E 'pattern1|pattern2' filename
 
+# grep only whole line containing `meooow`
+grep -w ^meooow file.txt
