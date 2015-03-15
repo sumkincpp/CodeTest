@@ -1,0 +1,334 @@
+#!/bin/bash
+#
+# Init file for Apache Traffic Server daemon
+#
+# chkconfig: 0123456 99 02
+# description: Apache Traffic server daemon
+#
+# processname: trafficserver
+# config: /usr/local/etc/trafficserver/remap.config
+# pidfile: /var/run/ats.pid
+
+# Source function library.
+. /etc/init.d/functions
+
+if [[ ! $1 ]]; then
+  echo "first input missing; example: `basename $0` [stop|start|restart|status|commit|condrestart|clearcache|stats|backup]"
+  exit 0
+fi
+
+atspath=/usr/local/bin
+
+#unless this gets changed, default to something safe
+operation=status
+
+start() {
+        echo "Starting ATS"
+        $atspath/trafficserver $operation
+        }
+
+stop() {
+        echo "Stopping ATS"
+        $atspath/trafficserver $operation
+        }
+
+status() {
+        $atspath/trafficserver $operation
+        }
+
+restart() {
+        echo "Restarting ATS"
+        $atspath/trafficserver $operation
+        }
+
+commit() {
+        echo "Committing changes"
+        $atspath/traffic_line -x
+        }
+
+
+condrestart() {
+        $atspath/trafficserver $operation
+        }
+
+clearcache() {
+        echo "Clearing ALL cache, probably not a great idea"
+        echo "Waiting a few seconds for you to press Control-C and cancel..."
+        sleep 10
+        $atspath/trafficserver -C clear
+        }
+restart() {
+        $atspath/trafficserver $operation
+        }
+
+backup() {
+        BACKUPDIR=/u01/backup/ats
+        SOURCEDIR=$atspath/../etc/trafficserver/*.*
+        DATE=`date +%Y%m%d`
+        HOUR=`date +%H%M%S`
+        mkdir -p $BACKUPDIR/"$DATE$HOUR"
+        cp $SOURCEDIR $BACKUPDIR/"$DATE$HOUR"
+        }
+
+stats() {
+echo System
+echo -n hostname & echo -n " " & $atspath/traffic_line -r proxy.node.hostname
+echo -n Objects served & echo -n " " & $atspath/traffic_line -r proxy.node.user_agents_total_documents_served
+echo -n Transactions per second & echo -n " " & $atspath/traffic_line -r proxy.node.user_agent_xacts_per_second
+echo -n Document hit rate & echo -n " " & $atspath/traffic_line -r proxy.node.cache_hit_ratio_avg_10s
+echo -n Bandwidth savings & echo -n " " & $atspath/traffic_line -r proxy.node.bandwidth_hit_ratio_avg_10s
+echo -n Cache percent free & echo -n " " & $atspath/traffic_line -r proxy.node.cache.percent_free
+echo -n Open origin server connections & echo -n " " & $atspath/traffic_line -r proxy.node.current_server_connections
+echo -n Open client connections & echo -n " " & $atspath/traffic_line -r proxy.node.current_client_connections
+echo -n Cache transfers in progress & echo -n " " & $atspath/traffic_line -r proxy.node.current_cache_connections
+echo -n Client throughput Mbits/sec & echo -n " " & $atspath/traffic_line -r proxy.node.client_throughput_out
+echo -n Transactions per second & echo -n " " & $atspath/traffic_line -r proxy.node.user_agent_xacts_per_second
+echo -n DNS lookups per second & echo -n " " & $atspath/traffic_line -r proxy.node.dns.lookups_per_second
+echo -n Host database hit rate & echo -n " " & $atspath/traffic_line -r proxy.node.hostdb.hit_ratio_avg_10s
+echo HTTP
+echo -n Total document bytes from client & echo -n " " & $atspath/traffic_line -r proxy.process.http.user_agent_response_document_total_size
+echo -n Total header bytes from client & echo -n " " & $atspath/traffic_line -r proxy.process.http.user_agent_response_header_total_size
+echo -n Total connections to client & echo -n " " & $atspath/traffic_line -r proxy.process.http.total_client_connections
+echo -n Client transactions in progress & echo -n " " & $atspath/traffic_line -r proxy.process.http.current_client_transactions
+echo -n Total document bytes from origin server & echo -n " " & $atspath/traffic_line -r proxy.process.http.origin_server_response_document_total_size
+echo -n Total header bytes from origin server & echo -n " " & $atspath/traffic_line -r proxy.process.http.origin_server_response_header_total_size
+echo -n Total connections to origin server & echo -n " " & $atspath/traffic_line -r proxy.process.http.total_server_connections
+echo -n Origin server transactions in progress & echo -n " " & $atspath/traffic_line -r proxy.process.http.current_server_transactions
+echo Cache
+echo -n Bytes used & echo -n " " & $atspath/traffic_line -r proxy.process.cache.bytes_used
+echo -n Cache size & echo -n " " & $atspath/traffic_line -r proxy.process.cache.bytes_total
+echo -n Lookups in progress & echo -n " " & $atspath/traffic_line -r proxy.process.cache.lookup.active
+echo -n Lookups completed & echo -n " " & $atspath/traffic_line -r proxy.process.cache.lookup.success
+echo -n Lookup misses & echo -n " " & $atspath/traffic_line -r proxy.process.cache.lookup.failure
+echo -n Reads in progress & echo -n " " & $atspath/traffic_line -r proxy.process.cache.read.active
+echo -n Reads completed & echo -n " " & $atspath/traffic_line -r proxy.process.cache.read.success
+echo -n Read misses & echo -n " " & $atspath/traffic_line -r proxy.process.cache.read.failure
+echo -n Writes in progress & echo -n " " & $atspath/traffic_line -r proxy.process.cache.write.active
+echo -n Writes completed & echo -n " " & $atspath/traffic_line -r proxy.process.cache.write.success
+echo -n Write failures & echo -n " " & $atspath/traffic_line -r proxy.process.cache.write.failure
+echo -n Updates in progress & echo -n " " & $atspath/traffic_line -r proxy.process.cache.update.active
+echo -n Updates completed & echo -n " " & $atspath/traffic_line -r proxy.process.cache.update.success
+echo -n Update failures & echo -n " " & $atspath/traffic_line -r proxy.process.cache.update.failure
+echo -n Removes in progress & echo -n " " & $atspath/traffic_line -r proxy.process.cache.remove.active
+echo -n Remove successes & echo -n " " & $atspath/traffic_line -r proxy.process.cache.remove.success
+echo -n Remove failures & echo -n " " & $atspath/traffic_line -r proxy.process.cache.remove.failure
+echo Host Database
+echo -n Total lookups & echo -n " " & $atspath/traffic_line -r proxy.process.hostdb.total_lookups
+echo -n Total hits & echo -n " " & $atspath/traffic_line -r proxy.process.hostdb.total_hits
+echo -n Time TTL min & echo -n " " & $atspath/traffic_line -r proxy.process.hostdb.ttl
+echo DNS
+echo -n DNS total lookups & echo -n " " & $atspath/traffic_line -r proxy.process.dns.total_dns_lookups
+echo -n Average lookup time msec & echo -n " " & $atspath/traffic_line -r proxy.process.dns.lookup_avg_time
+echo -n DNS successes & echo -n " " & $atspath/traffic_line -r proxy.process.dns.lookup_successes
+echo Logging
+echo -n Log files currently open & echo -n " " & $atspath/traffic_line -r proxy.process.log.log_files_open
+echo -n Space used for log files & echo -n " " & $atspath/traffic_line -r proxy.process.log.log_files_space_used
+echo -n Number of access events logged & echo -n " " & $atspath/traffic_line -r proxy.process.log.event_log_access
+echo -n Number of access events skipped & echo -n " " & $atspath/traffic_line -r proxy.process.log.event_log_access_skip
+echo -n Number of error events logged & echo -n " " & $atspath/traffic_line -r proxy.process.log.event_log_error
+echo Congestion Control
+echo -n Number of congestions Traffic Server has observed because the maximum number of connections was exceeded. & echo -n " " & $atspath/traffic_line -r proxy.process.congestion.congested_on_max_connection
+echo -n Number of congestions Traffic Server has observed because of an OS response or timeout failure. & echo -n " " & $atspath/traffic_line -r proxy.process.congestion.congested_on_conn_failures
+
+}
+
+
+stats_system() {
+echo System
+$atspath/traffic_line -r proxy.node.hostname
+$atspath/traffic_line -r proxy.node.user_agents_total_documents_served
+$atspath/traffic_line -r proxy.node.user_agent_xacts_per_second
+$atspath/traffic_line -r proxy.node.cache_hit_ratio_avg_10s
+$atspath/traffic_line -r proxy.node.bandwidth_hit_ratio_avg_10s
+$atspath/traffic_line -r proxy.node.cache.percent_free
+$atspath/traffic_line -r proxy.node.current_server_connections
+$atspath/traffic_line -r proxy.node.current_client_connections
+$atspath/traffic_line -r proxy.node.current_cache_connections
+$atspath/traffic_line -r proxy.node.client_throughput_out
+$atspath/traffic_line -r proxy.node.user_agent_xacts_per_second
+$atspath/traffic_line -r proxy.node.dns.lookups_per_second
+$atspath/traffic_line -r proxy.node.hostdb.hit_ratio_avg_10s
+        }
+
+stats_http() {
+echo HTTP
+$atspath/traffic_line -r proxy.process.http.user_agent_response_document_total_size
+$atspath/traffic_line -r proxy.process.http.user_agent_response_header_total_size
+$atspath/traffic_line -r proxy.process.http.total_client_connections
+$atspath/traffic_line -r proxy.process.http.current_client_transactions
+$atspath/traffic_line -r proxy.process.http.origin_server_response_document_total_size
+$atspath/traffic_line -r proxy.process.http.origin_server_response_header_total_size
+$atspath/traffic_line -r proxy.process.http.total_server_connections
+$atspath/traffic_line -r proxy.process.http.current_server_transactions
+        }
+
+stats_cache() {
+echo Cache
+$atspath/traffic_line -r proxy.process.cache.bytes_used
+$atspath/traffic_line -r proxy.process.cache.bytes_total
+$atspath/traffic_line -r proxy.process.cache.lookup.active
+$atspath/traffic_line -r proxy.process.cache.lookup.success
+$atspath/traffic_line -r proxy.process.cache.lookup.failure
+$atspath/traffic_line -r proxy.process.cache.read.active
+$atspath/traffic_line -r proxy.process.cache.read.success
+$atspath/traffic_line -r proxy.process.cache.read.failure
+$atspath/traffic_line -r proxy.process.cache.write.active
+$atspath/traffic_line -r proxy.process.cache.write.success
+$atspath/traffic_line -r proxy.process.cache.write.failure
+$atspath/traffic_line -r proxy.process.cache.update.active
+$atspath/traffic_line -r proxy.process.cache.update.success
+$atspath/traffic_line -r proxy.process.cache.update.failure
+$atspath/traffic_line -r proxy.process.cache.remove.active
+$atspath/traffic_line -r proxy.process.cache.remove.success
+$atspath/traffic_line -r proxy.process.cache.remove.failure
+        }
+
+stats_host() {
+echo Host Database
+$atspath/traffic_line -r proxy.process.hostdb.total_lookups
+$atspath/traffic_line -r proxy.process.hostdb.total_hits
+$atspath/traffic_line -r proxy.process.hostdb.ttl
+        }
+
+stats_dns() {
+echo DNS
+$atspath/traffic_line -r proxy.process.dns.total_dns_lookups
+$atspath/traffic_line -r proxy.process.dns.lookup_avg_time
+$atspath/traffic_line -r proxy.process.dns.lookup_successes
+        }
+
+stats_logging() {
+echo Logging
+$atspath/traffic_line -r proxy.process.log.log_files_open
+$atspath/traffic_line -r proxy.process.log.log_files_space_used
+$atspath/traffic_line -r proxy.process.log.event_log_access
+$atspath/traffic_line -r proxy.process.log.event_log_access_skip
+$atspath/traffic_line -r proxy.process.log.event_log_error
+        }
+
+stats_concontrol() {
+echo Congestion Control
+$atspath/traffic_line -r proxy.process.congestion.congested_on_max_connection
+$atspath/traffic_line -r proxy.process.congestion.congested_on_conn_failures
+        }
+
+
+
+case "$1" in
+  start)
+        operation=start
+        start
+        RETVAL=1
+        exit
+        ;;
+  stop)
+        operation=stop
+        stop
+        RETVAL=2
+        exit
+        ;;
+  restart)
+        operation=restart
+        restart
+        RETVAL=3
+        exit
+        ;;
+  status)
+        operation=status
+        status
+        RETVAL=4
+        exit
+        ;;
+
+  commit)
+        operation=-x
+        commit
+        RETVAL=10
+        exit
+        ;;
+
+  clearcache)
+        operation=clearcache
+        clearcache
+        RETVAL=5
+        exit
+        ;;
+  stats)
+        operation=stats
+        stats
+        RETVAL=20
+        exit
+        ;;
+ stats_system)
+        operation=stats_system
+        stats_system
+        RETVAL=21
+        exit
+        ;;
+ stats_http)
+        operation=stats_http
+        stats_http
+        RETVAL=22
+        exit
+        ;;
+ stats_cache)
+        operation=stats_cache
+        stats_cache
+        RETVAL=23
+        exit
+        ;;
+ stats_host)
+        operation=stats_host
+        stats_host
+        RETVAL=24
+        exit
+        ;;
+ stats_dns)
+        operation=stats_dns
+        stats_dns
+        RETVAL=25
+        exit
+        ;;
+ stats_logging)
+        operation=stats_logging
+        stats_logging
+        RETVAL=26
+        exit
+        ;;
+ stats_concontrol)
+        operation=stats_concontrol
+        stats_concontrol
+        RETVAL=27
+        exit
+        ;;
+
+  condrestart)
+        operation=condrestart
+        condrestart
+        RETVAL=6
+        exit
+        ;;
+
+  backup)
+        operation=backup
+        backup
+        RETVAL=0
+        exit
+        ;;
+
+
+  usage)
+        operation=usage
+        echo "first input missing; example: `basename $0` [stop|start|restart|status|clearcache|stats]"
+        RETVAL=254
+        exit
+        ;;
+
+  *)    ./`basename $0` usage
+        RETVAL=254
+        exit
+        ;;
+esac
+
+
+
