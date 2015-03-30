@@ -1,8 +1,6 @@
 
 
-
 INCLUDE(path/to/file.cmake)
-
 
 LINK_DIRECTORIES( ${LINK_DIRECTORIES} /absPath/libtourtre/)
 
@@ -26,3 +24,8 @@ ENDIF(WIN32)
 IF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
   SET(CMAKE_INSTALL_PREFIX "/opt/foo" CACHE PATH "FOO install prefix" FORCE)
 ENDIF(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+
+# Detecting Architecture (x86_64/etc)
+# https://stackoverflow.com/questions/11944060/how-to-detect-target-architecture-using-cmake
+EXECUTE_PROCESS( COMMAND uname -m COMMAND tr -d '\n' OUTPUT_VARIABLE ARCHITECTURE )
+message( STATUS "Architecture: ${ARCHITECTURE}" )
