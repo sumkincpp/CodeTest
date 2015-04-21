@@ -23,3 +23,6 @@ grep -E 'pattern1|pattern2' filename
 
 # grep only whole line containing `meooow`
 grep -w ^meooow file.txt
+
+# unbuffered grep by line
+tail -f file | grep --line-buffered my_pattern
