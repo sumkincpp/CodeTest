@@ -27,3 +27,6 @@ and bla bla bla
 print "\033[2J";   #clear the screen
 print "\033[0;0H"; #jump to 0,0
 
+# Chomp oneliner -----------------------------------------
+
+chomp($HOSTNAME = `hostname -s`);
