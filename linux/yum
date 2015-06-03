@@ -1,0 +1,8 @@
+# Checking releasever/other
+
+python -c 'import yum, pprint; yb = yum.YumBase(); pprint.pprint(yb.conf.yumvar, width=1)'
+{'arch': 'ia32e',
+ 'basearch': 'x86_64',
+ 'releasever': '5',
+ 'yum0': '200',
+ 'yum5': 'foo'}
