@@ -37,3 +37,6 @@ wget -np -e robots=off --mirror --domains=staticweb.archive.org,web.archive.org 
 /usr/bin/time --output=outtime -p sh -c 'echo "a"; echo "b"'
 
 /usr/bin/time -p sh -c 'poong'
+
+# find dead symlinks on linux FS
+find . -type l -xtype l
