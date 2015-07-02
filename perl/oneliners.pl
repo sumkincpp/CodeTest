@@ -53,3 +53,6 @@ perl -i.bak -pe 's/\/\*.*?\*\///' $file
 cat test | perl -pe 's/word/second/'
 # remove trailing spaces in file
 cat test | perl -pe 's/\s*$//'
+
+# grep using perl text files
+ls | perl -nle 'print if -f && -T'
