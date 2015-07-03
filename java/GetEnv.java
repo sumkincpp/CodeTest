@@ -8,5 +8,9 @@ public class GetEnv {
                               envName,
                               env.get(envName));
         }
+        
+        // And properties
+        Properties props = System.getProperties();
+        props.list(System.out);
     }
 }
