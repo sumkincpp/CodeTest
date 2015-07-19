@@ -1,3 +1,7 @@
+#
+# OpeSSL ALL CIPHERS list https://www.openssl.org/docs/apps/ciphers.html
+#
+
 # self-signed certificate (verse.key) and private key (verse.pem)
 # sha256 as `sha1` is unsecure
 sudo openssl req -config openssl.cnf -x509 -sha256 -nodes -days 3650 -newkey rsa:4096 -keyout verse.key -out verse.crt
