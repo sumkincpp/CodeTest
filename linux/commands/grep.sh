@@ -26,3 +26,8 @@ grep -w ^meooow file.txt
 
 # unbuffered grep by line
 tail -f file | grep --line-buffered my_pattern
+
+# Binary grep!
+# https://stackoverflow.com/questions/9988379/how-to-grep-a-text-file-which-contains-some-binary-data
+grep -a
+grep --binary-files=text
