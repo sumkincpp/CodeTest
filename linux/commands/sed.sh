@@ -12,3 +12,6 @@ sed -i '' -e 's/foo/bar/' target.file
 
 #sed and print next 10-th line
 sed -n '/hehee/{10n;p;}' target.file
+
+#delete empty lines
+sed '/^$/d'
