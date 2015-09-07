@@ -56,3 +56,6 @@ cat test | perl -pe 's/\s*$//'
 
 # grep using perl text files (filter sorted)
 ls | perl -nle 'print if -f && -T'
+
+# Splitting like AWK PROFI
+perl -F'\s+' -lane 'print $F[1];'
