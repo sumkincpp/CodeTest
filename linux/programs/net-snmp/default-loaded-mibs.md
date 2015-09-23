@@ -1,4 +1,5 @@
-```PS C:\Users\Administrator> snmpwalk -v2c -c public xxxx 1.3.6.1.2.1
+```
+PS C:\Users\Administrator> snmpwalk -v2c -c public xxxx 1.3.6.1.2.1
 MIB search path: c:/usr/share/snmp/mibs
 Cannot find module (IP-MIB): At line 0 in (none)
 Cannot find module (IF-MIB): At line 0 in (none)
