@@ -1,0 +1,8 @@
+# Disable directory Listing
+Options -Indexes
+
+# Deny access to dotted files 
+RewriteEngine on
+
+RewriteCond %{THE_REQUEST} ^.*/\.
+RewriteRule ^(.*)$ - [R=404]
