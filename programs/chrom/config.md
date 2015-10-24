@@ -1,0 +1,2 @@
+chrome://flags/
+chrome://gpu/
