@@ -1,5 +1,5 @@
 
-
+std::vectornt> v1, v2;
 std::transform(v1.begin(),v1.end(),std::back_inserter(v2), ExcitingUnaryFunctor());
 
 
