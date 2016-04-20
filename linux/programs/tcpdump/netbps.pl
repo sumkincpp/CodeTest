@@ -2,6 +2,8 @@
 #
 # usage: sudo tcpdump -i any -l -e -n host XXX and port YYY | ./netbps.pl
 #
+# Source: https://superuser.com/questions/356907/how-to-get-real-time-network-statistics-in-linux-with-kb-mb-bytes-format-and-for
+#
 use strict;
 use warnings;
 use Time::HiRes;
