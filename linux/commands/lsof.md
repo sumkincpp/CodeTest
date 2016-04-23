@@ -29,3 +29,10 @@ lsof files used in directory /var/log
 ```
 sudo lsof -n  +D /var/log
 ```
+
+lsof + perl: counting Descriptors by groups ("<process_name>:<process_pid>")
+```
+sudo lsof -n -P | perl -lane '$x{"$F[0]:$F[1]"}++; END { print "$x{$_}\t$_" for sort {$x{$a}<=>$x{$b}} keys %x}';
+```
+
+
