@@ -24,3 +24,18 @@ $ ps -C java -O rss | gawk '{ count ++; sum += $2 }; END {count --; print "Numbe
 Number of processes = 23
 Memory usage per process = 326.818 MB
 Total memory usage = 7516.8 MB
+
+# Counting VSZ/RSZ totals 
+VSZ:
+$ ps aux | awk '{ s += $5 } END {print "sum =", s, s/1024^2, "GiB, average =", s/NR, ", over", NR, "counts" }'
+sum = 164325620 156.713 GiB, average = 193780 , over 848 counts
+
+RSS:
+$ ps aux | awk '{ s += $6 } END {print "sum =", s, s/1024^2, "GiB, average =", s/NR, ", over", NR, "counts" }'
+sum = 69238760 66.0312 GiB, average = 81745.9 , over 847 counts
+
+$ free -m:
+             total       used       free     shared    buffers     cached
+Mem:        128929     106939      21990          1        103        682
+-/+ buffers/cache:     106153      22775
+Swap:         8191        229       7962
