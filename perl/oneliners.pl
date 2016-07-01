@@ -59,3 +59,7 @@ ls | perl -nle 'print if -f && -T'
 
 # Splitting like AWK PROFI
 perl -F'\s+' -lane 'print $F[1];'
+
+perl -le 'print map { (a..z,A..Z,0..9)[rand 62] } 0..pop' 8
+perl -le 'print map { ("a".."z")[rand 26] } 1..8'
+perl -le 'print map { ("a".."z", 0..9)[rand 36] } 1..8'
