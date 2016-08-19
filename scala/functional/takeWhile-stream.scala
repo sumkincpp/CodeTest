@@ -8,3 +8,7 @@ Iterator.continually(reader.readLine())
   }
 
 println(responseBuffer.toString())
+/// or even
+val inputStream = ???
+val content = io.Source.fromInputStream(inputStream).getLines.mkString
+inputStream.close
