@@ -1,3 +1,5 @@
+//--------------------------------------------------------------------------------------
+
 scala> Map[String,Any]()
 res24: scala.collection.immutable.Map[String,Any] = Map()
 
@@ -16,3 +18,13 @@ defined object PropertyMap
 
 scala> PropertyMap()
 res26: scala.collection.immutable.Map[String,Any] = Map()
+
+//--------------------------------------------------------------------------------------
+scala> type Meow = Map[Int, String]
+defined type alias Meow
+
+scala> new Meow()
+<console>:13: error: trait Map is abstract; cannot be instantiated
+       new Meow()
+       ^
+//--------------------------------------------------------------------------------------
