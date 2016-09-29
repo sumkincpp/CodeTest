@@ -25,6 +25,8 @@ git branch <new_branchname>
 git checkout <new_branchname>
 # OR
 git checkout -b <new_branchname>
+# Pushing local branch remotely ( at first!)
+git push -u origin <branch_name>
 #------------------------------------------------------------------------
 
 
