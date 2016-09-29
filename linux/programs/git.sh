@@ -27,6 +27,11 @@ git checkout <new_branchname>
 git checkout -b <new_branchname>
 # Pushing local branch remotely ( at first!)
 git push -u origin <branch_name>
+
+# List local branches
+git branch --merged
+# Delete specific branch
+git branch -d <branchname>
 #------------------------------------------------------------------------
 
 
