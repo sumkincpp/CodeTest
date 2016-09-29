@@ -15,6 +15,16 @@ git config --global core.autocrlf
 # Default pushing for current branch
 git config --global push.default simple.
 
+#------------------------------------------------------------------------
+# available branches
+git branch
+# all remote branches
+git branch -a
+# new branch
+git checkout XXX
+#------------------------------------------------------------------------
+
+
 # clone with one commit depth
 git clone --depth=1 <blablabla>
 
