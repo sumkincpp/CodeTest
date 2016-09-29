@@ -42,6 +42,57 @@ git diff HEAD
 # word by word comparison
 git diff --color-words
 #------------------------------------------------------------------------
+git log
+git log --oneline --graph --decorate --all
+git log --oneline --graph
+git log --stat
+git log --patch
+
+$ git log --oneline --graph --decorate --all
+*   0b5f8e4 (HEAD -> master, origin/master, origin/HEAD) Merge branch 'sumkincpp-branch'
+|\
+| * 95d8766 (origin/sumkincpp-branch) Update sumkincpp-branch
+| * 7eccb13 new data from new local branch
+| * 66f5d75 (origin/sumkincpp-more-bio) even more changes
+| * e2e6d13 more bio
+* | 31b03fb even more changes
+* | 9ef17a2 more bio
+|/
+*   35feb78 Merge pull request #6 from sumkincpp/FedorSumkin
+|\
+| * 1ee14fd (origin/FedorSumkin) added fav color
+| * 3fe5091 Create FedorSumkin.txt
+* | 117b379 Create FedorSumkin.md
+|/
+| * 3142390 (origin/add-gitignore) Add gitignore file to ignore log
+|/
+* 8173a64 Update README.md
+* c569ac5 change repo specific links
+* ec0b89b initialize template repo
+* 321618c Initial commit
+
+$ git log --oneline --graph
+*   0b5f8e4 Merge branch 'sumkincpp-branch'
+|\
+| * 95d8766 Update sumkincpp-branch
+| * 7eccb13 new data from new local branch
+| * 66f5d75 even more changes
+| * e2e6d13 more bio
+* | 31b03fb even more changes
+* | 9ef17a2 more bio
+|/
+*   35feb78 Merge pull request #6 from sumkincpp/FedorSumkin
+|\
+| * 1ee14fd added fav color
+| * 3fe5091 Create FedorSumkin.txt
+* | 117b379 Create FedorSumkin.md
+|/
+* 8173a64 Update README.md
+* c569ac5 change repo specific links
+* ec0b89b initialize template repo
+* 321618c Initial commit
+
+#------------------------------------------------------------------------
 
 # clone with one commit depth
 git clone --depth=1 <blablabla>
