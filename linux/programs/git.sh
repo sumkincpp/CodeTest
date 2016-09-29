@@ -1,3 +1,7 @@
+--system/--global/--local
+system-wide/user-wide/project-wide
+
+git config --list
 
 # clone with one commit depth
 git clone --depth=1 <blablabla>
