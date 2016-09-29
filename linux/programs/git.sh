@@ -12,6 +12,9 @@ git config --global core.autocrlf
 # Windows - true
 # Mac/Linux - input
 
+# Default pushing for current branch
+git config --global push.default simple.
+
 # clone with one commit depth
 git clone --depth=1 <blablabla>
 
