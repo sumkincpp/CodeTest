@@ -21,7 +21,10 @@ git branch
 # all remote branches
 git branch -a
 # new branch
-git checkout XXX
+git branch <new_branchname>
+git checkout <new_branchname>
+# OR
+git checkout -b <new_branchname>
 #------------------------------------------------------------------------
 
 
