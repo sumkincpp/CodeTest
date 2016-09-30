@@ -93,6 +93,13 @@ $ git log --oneline --graph
 * 321618c Initial commit
 
 #------------------------------------------------------------------------
+# Modifying previous commit
+# new files -> add to stage
+git add file_that_we_forgot
+# --ammend, i.e. modify previous commit, editor will open
+git commit --ammend
+
+#------------------------------------------------------------------------
 
 # clone with one commit depth
 git clone --depth=1 <blablabla>
