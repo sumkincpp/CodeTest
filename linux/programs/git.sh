@@ -109,6 +109,18 @@ git commit --ammend
 git revert <file>
 # unstaging file
 git reset HEAD file.md
+
+# Move my branch to point to commit, 
+# working dir and staging are untouched( same state )
+git reset --soft <my-branch> <other-commit>
+
+# <my-branch> and the staging area look like the <other-commit> snapshot
+# default mode, usefull for partial staging
+git reset --mixed <my-branch> <other-commit>
+
+# deletes LOCAL changes(all uncommittted)
+git reset --hard <my-branch> <other-commit>
+
 #------------------------------------------------------------------------
 
 # clone with one commit depth
