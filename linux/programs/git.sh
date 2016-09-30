@@ -1,5 +1,10 @@
 --system/--global/--local
 system-wide/user-wide/project-wide
+#------------------------------------------------------------------------
+- staging 
+- most recent commit
+- working directory
+#------------------------------------------------------------------------
 
 git config --list
 
