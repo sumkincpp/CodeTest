@@ -122,6 +122,9 @@ git reset --mixed <my-branch> <other-commit>
 git reset --hard <my-branch> <other-commit>
 
 #------------------------------------------------------------------------
+# overwriting file with PREVIOUSLY committed version
+git checkout -- HELLOW
+#------------------------------------------------------------------------
 
 # clone with one commit depth
 git clone --depth=1 <blablabla>
