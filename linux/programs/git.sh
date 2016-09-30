@@ -125,6 +125,12 @@ git reset --hard <my-branch> <other-commit>
 # overwriting file with PREVIOUSLY committed version
 git checkout -- HELLOW
 #------------------------------------------------------------------------
+# git aliases
+git config --global alias.lol "log --oneline --graph --decorate --all"
+# git lol
+git config --global alias.co "commit -m"
+# git co "message"
+#------------------------------------------------------------------------
 
 # clone with one commit depth
 git clone --depth=1 <blablabla>
