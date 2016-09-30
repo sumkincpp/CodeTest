@@ -100,6 +100,11 @@ git add file_that_we_forgot
 git commit --ammend
 
 #------------------------------------------------------------------------
+# reverting file contents
+git revert <file>
+# unstaging file
+git reset HEAD file.md
+#------------------------------------------------------------------------
 
 # clone with one commit depth
 git clone --depth=1 <blablabla>
