@@ -1,4 +1,4 @@
-   * [[https://activations.cdn.mozilla.net/en-US/|Services for Firefox]]
+   * [Services for Firefox](https://activations.cdn.mozilla.net/en-US/)
    
 ========================================
 social.manifest.twitter-com
@@ -25,3 +25,7 @@ social.manifest.twitter-com
 	"installDate" : 1475566100779
 }
 ```
+  * https://plus.google.com/share?url=%{url}&soc-app=170
+  * https://twitter.com/intent/tweet?url=%{url}&text=%{text}
+  * https://mail.google.com/mail/?view=cm&ui=2&tf=0&fs=1&body=%{body}&su=%{title}
+  * https://www.google.com/bookmarks/mark?op=edit&output=popup&title=%{title}&bkmk=%{url}
