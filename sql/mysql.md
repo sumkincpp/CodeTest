@@ -1,0 +1,7 @@
+
+```sql
+CREATE DEFINER = CURRENT_USER PROCEDURE test()
+BEGIN
+  
+END;
+```
