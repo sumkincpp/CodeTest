@@ -18,3 +18,5 @@ $ osascript -e 'tell app "Finder" to quit'
 
 # Keep awake, with screen on
 caffeinate -u -t 36000
+
+networksetup -removeallpreferredwirelessnetworks en1
