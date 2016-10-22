@@ -80,6 +80,13 @@ osascript -e 'get volume settings'
 # log to /var/log/system.log
 osascript -e 'log "hello message"'
 
+#
+osascript -e 'tell application "Firefox" to get windows'
+osascript -e 'tell application "Firefox" to get properties'
+osascript -e 'tell application "Firefox" to get the bounds of the first window'
+
+osascript -e 'tell application "Firefox" to count (every window whose (closeable is true))'
+
 # ---------------------------------------------------------
 
 $ osascript -e "id of app \"Finder\"";
