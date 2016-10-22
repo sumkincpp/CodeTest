@@ -13,7 +13,8 @@ osascript -e 'set volume output muted false'
 osascript -e 'tell app "Finder" to get disks'
 osascript -e 'tell app "Finder" to empty trash'
 osascript -e 'tell app "Finder" to restart'
-osascript -e 'tell app "Finder"' -e 'eject the disks' -e 'end tell'
+osascript -e 'tell app "Finder" to eject the disks'
+osascript -e 'tell app "Finder" to eject (every disk whose ejectable is true)'
 
 osascript -e 'tell application "ScreenSaverEngine"' -e 'activate' -e 'end tell'
 
@@ -44,10 +45,29 @@ osascript -e 'tell application "Google Chrome" to reload active tab of window 1'
 osascript -e 'say "what are you doing" using "alex"'
 
 # Keystrokes -->
-osascript -e 'tell application "System Events" to keystroke tab';
-osascript -e 'tell application "System Events" to keystroke "date\n"';
+osascript -e 'tell application "System Events" to keystroke (key code 124)'
+osascript -e 'tell application "System Events" to keystroke tab'
+osascript -e 'tell application \"System Events\" to keystroke return'
+osascript -e 'tell application "System Events" to keystroke "date\n"'
+osascript -e 'tell application "System Events" to keystroke the clipboard as text'
+# full screen
+osascript -e 'tell application "System Events" to keystroke "f" using {command down, option down}'
+
+osascript -e 'tell application "System Events" to set volume input volume 0'
+osascript -e 'tell application "System Events" to set volume input volume 1'
+
 osascript -e 'tell application "System Events" to delay 0.5';
 osascript -e 'tell application "System Events" to log out'
+osascript -e 'tell application "System Events" to shut down'
+osascript -e 'tell application "System Events" to sleep'
+
+osascript -e 'tell application "System Events" to get name of every application process'
+
+osascript -e 'tell application "System Events" to set the autohide of the dock preferences to true'
+osascript -e 'tell application "System Events" to set the autohide of the dock preferences to false'
+
+osascript -e 'tell application "System Events" to delete login item "XXX"'
+
 
 
 # Volume
