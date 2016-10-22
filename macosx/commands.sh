@@ -12,5 +12,9 @@ Password for fedor:
 fedor@Fedors-MacBook-Pro:~$ defaults write com.apple.screencapture location ~/Pictures/Screenshots/
 fedor@Fedors-MacBook-Pro:~$ killall SystemUIServer
 
+# Full path in title
+$ defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
+$ osascript -e 'tell app "Finder" to quit'
+
 # Keep awake, with screen on
 caffeinate -u -t 36000
