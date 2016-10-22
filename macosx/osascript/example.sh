@@ -2,6 +2,7 @@
 osascript -e 'open location "$1"'
 
 osascript -e 'display notification "Execution complete." with title "Done."'
+osascript -e 'display dialog "What is your name?" default answer ""'
 
 osascript -e "the clipboard"
 
@@ -37,6 +38,8 @@ osascript -e 'tell application "iTunes" to name of current track as string'
 osascript -e 'tell application "Safari" to return URL of front document'
 osascript -e 'tell application "Safari" to return name of front document'
 
+osascript -e 'tell application "Google Chrome" to reload active tab of window 1';
+
 # Speeking what are you~
 osascript -e 'say "what are you doing" using "alex"'
 
@@ -44,6 +47,8 @@ osascript -e 'say "what are you doing" using "alex"'
 osascript -e 'tell application "System Events" to keystroke tab';
 osascript -e 'tell application "System Events" to keystroke "date\n"';
 osascript -e 'tell application "System Events" to delay 0.5';
+osascript -e 'tell application "System Events" to log out'
+
 
 # Volume
 ## Kill the annoying terminal bell
