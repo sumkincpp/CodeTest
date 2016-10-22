@@ -34,6 +34,9 @@ osascript -e 'tell application "iTunes" to set player position to player positio
 osascript -e 'tell application "iTunes" to artist of current track as string'
 osascript -e 'tell application "iTunes" to name of current track as string'
 
+osascript -e 'tell application "Safari" to return URL of front document'
+osascript -e 'tell application "Safari" to return name of front document'
+
 # Speeking what are you~
 osascript -e 'say "what are you doing" using "alex"'
 
