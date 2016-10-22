@@ -17,6 +17,7 @@ osascript -e 'tell app "Finder"' -e 'eject the disks' -e 'end tell'
 osascript -e 'tell application "ScreenSaverEngine"' -e 'activate' -e 'end tell'
 
 osascript -e 'quit app "XXX"'
+osascript -e 'tell app "XXX" to quit'
 osascript -e 'tell app "XXX" to activate'
 osascript -e 'tell app "XXX" to hide'
 
@@ -45,6 +46,9 @@ osascript -e 'set volume alert volume 0'
 osascript -e 'output volume of (get volume settings)'
 osascript -e 'get volume settings'
 
+osascript -e 'log "hello message"'
+
+
 # ---------------------------------------------------------
 
 $ osascript -e "id of app \"Finder\"";
@@ -52,3 +56,8 @@ com.apple.finder
 
 $ osascript -e 'output volume of (get volume settings)'
 13
+
+# ---------------------------------------------------------
+# New tab ->
+osascript -e 'activate application "iTerm"'
+osascript -e 'tell application "System Events" to keystroke "t" using command down'
