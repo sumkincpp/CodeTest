@@ -31,6 +31,8 @@ osascript -e 'tell application "iTunes" to next track'
 osascript -e 'tell application "iTunes" to previous track'
 # fast-forward to 30 seconds
 osascript -e 'tell application "iTunes" to set player position to player position + 30'
+osascript -e 'tell application "iTunes" to artist of current track as string'
+osascript -e 'tell application "iTunes" to name of current track as string'
 
 # Speeking what are you~
 osascript -e 'say "what are you doing" using "alex"'
@@ -46,8 +48,8 @@ osascript -e 'set volume alert volume 0'
 osascript -e 'output volume of (get volume settings)'
 osascript -e 'get volume settings'
 
+# log to /var/log/system.log
 osascript -e 'log "hello message"'
-
 
 # ---------------------------------------------------------
 
