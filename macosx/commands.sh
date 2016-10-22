@@ -11,3 +11,6 @@ Password for fedor:
 # Specifying Screenshots folder in Mac OS X
 fedor@Fedors-MacBook-Pro:~$ defaults write com.apple.screencapture location ~/Pictures/Screenshots/
 fedor@Fedors-MacBook-Pro:~$ killall SystemUIServer
+
+# Keep awake, with screen on
+caffeinate -u -t 36000
