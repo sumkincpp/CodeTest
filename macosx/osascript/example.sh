@@ -68,6 +68,7 @@ osascript -e 'tell application "System Events" to set the autohide of the dock p
 
 osascript -e 'tell application "System Events" to delete login item "XXX"'
 
+osascript -e "tell application \"System Events\" to make new login item with properties { path: \"/Users/$USER/Applications/$app\", hidden:true } at end"
 
 
 # Volume
