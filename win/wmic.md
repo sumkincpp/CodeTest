@@ -1,0 +1,2 @@
+# startup applications ->
+wmic startup
