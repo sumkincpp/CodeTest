@@ -15,6 +15,7 @@ ipconfig /flushdns
 
 # --------------------------------------------------
 ipconfig /all
+ipconfig /renew
 systeminfo
 arp -a
 whoami
