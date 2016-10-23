@@ -5,6 +5,7 @@ wmic useraccount list
 wmic group list full
 
 
+
 wmic diskdrive get status
 wmic bios get serialnumber
 wmic logicaldisk get name, volumename
@@ -50,6 +51,7 @@ wmic netuse list full /format:htable
 wmic process get name,executablepath
 wmic process where "name like '%java%'" delete
 wmic process get CSName,Description,ExecutablePath,ProcessId 
+wmic process get name,pagefileusage,virtualsize,workingsetsize,usermodetime,kernelmodetime,ThreadCount /format:csv
 
 # cpu
 
