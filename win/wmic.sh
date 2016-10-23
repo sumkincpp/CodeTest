@@ -4,8 +4,6 @@ wmic startup
 wmic useraccount list
 wmic group list full
 
-
-
 wmic diskdrive get status
 wmic bios get serialnumber
 wmic logicaldisk get name, volumename
@@ -78,3 +76,8 @@ wmic path win32_battery get batterystatus
 wmic path win32_battery get estimatedchargeremaining
 
 WMIC PATH WIN32_USERACCOUNT WHERE LOCALACCOUNT=TRUE get caption
+wmic path Win32_UserAccount get /ALL /FORMAT:list
+
+wmic path Win32_Desktop get /ALL /FORMAT:list
+
+wmic path win32_registry get /?
