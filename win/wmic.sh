@@ -1,7 +1,6 @@
 # startup applications
 wmic startup
 
-
 wmic useraccount list
 wmic group list full
 
@@ -19,6 +18,13 @@ wmic ComputerSystem get TotalPhysicalMemory
 wmic OS get TotalVirtualMemorySize
 
 wmic product get name
+
+# list brief
+
+wmic product list brief | sort
+wmic service list brief | sort
+wmic process list brief | sort
+wmic startup list brief | sort
 
 # net things
 
