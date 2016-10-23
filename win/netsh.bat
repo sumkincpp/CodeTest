@@ -28,3 +28,5 @@ netsh firewall show state
 netsh firewall show opmode
 netsh firewall show port
 netsh firewall show config
+
+netsh firewall set portopening protocol = TCP port = 1434 name = SQLPort mode = ENABLE scope = SUBNET profile = CURRENT
