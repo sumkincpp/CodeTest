@@ -12,3 +12,9 @@ netstat -ano
 
 # Flush dat DNS-es!
 ipconfig /flushdns
+
+# --------------------------------------------------
+ipconfig /all
+systeminfo
+arp -a
+whoami
