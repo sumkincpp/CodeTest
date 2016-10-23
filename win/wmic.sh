@@ -52,6 +52,7 @@ wmic process get name,executablepath
 wmic process where "name like '%java%'" delete
 wmic process get CSName,Description,ExecutablePath,ProcessId 
 wmic process get name,pagefileusage,virtualsize,workingsetsize,usermodetime,kernelmodetime,ThreadCount /format:csv
+wmic process where name="cmd.exe" CALL setpriority "below normal"
 
 # cpu
 
@@ -72,3 +73,8 @@ wmic baseboard get version
 
 wmic path win32_networkadapter where index=0 call disable
 wmic path win32_networkadapter where index=0 call enable
+
+wmic path win32_battery get batterystatus 
+wmic path win32_battery get estimatedchargeremaining
+
+WMIC PATH WIN32_USERACCOUNT WHERE LOCALACCOUNT=TRUE get caption
