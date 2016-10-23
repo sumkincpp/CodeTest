@@ -8,3 +8,8 @@ net localgroup users /domain
 
 rem started services
 net start
+
+net share
+
+net view
+net view /domain
