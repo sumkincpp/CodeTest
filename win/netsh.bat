@@ -22,3 +22,9 @@ Enabled        Connected      Dedicated        VMware Network Adapter VMnet8
 Enabled        Connected      Dedicated        VirtualBox Host-Only Network
 Disabled       Disconnected   Dedicated        Cisco AnyConnect Secure Mobility Client Connection
 Enabled        Connected      Dedicated        VirtualBox Host-Only Network #2
+
+rem ----------------------------------------
+netsh firewall show state
+netsh firewall show opmode
+netsh firewall show port
+netsh firewall show config
