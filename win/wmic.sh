@@ -67,3 +67,8 @@ wmic cpu get loadpercentage /VALUE /FORMAT:VALUE
 wmic baseboard get manufacturer
 wmic baseboard get product
 wmic baseboard get version
+
+# path
+
+wmic path win32_networkadapter where index=0 call disable
+wmic path win32_networkadapter where index=0 call enable
