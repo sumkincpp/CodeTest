@@ -25,3 +25,8 @@ lusrmgr.msc   # Local User Manager Gui
 control       # Control Panel 
 secpol.msc    # Local Security Policy for firewalls, Accounts, etc
 eventvwr.msc  # Event Viewer
+
+TASKLIST /SVC /FO LIST
+driverquery /FO list /v 
+dir /s /q /a c:\
+schtasks
