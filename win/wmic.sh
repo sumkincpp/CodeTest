@@ -19,6 +19,8 @@ wmic OS get TotalVirtualMemorySize
 
 wmic product get name
 
+wmic useraccount where name='Administrator' call Rename admin
+
 # list brief
 
 wmic product list brief | sort
@@ -42,6 +44,7 @@ wmic process get CSName,Description,ExecutablePath,ProcessId
 
 wmic cpu list brief
 wmic cpu get name
+wmic cpu get name /Value
 wmic CPU get NumberOfLogicalProcessors
 wmic CPU get NumberOfCores
 
