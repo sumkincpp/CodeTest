@@ -1,4 +1,5 @@
 net user %username% 
+net user /add bob bob
 net users
 net session
 net accounts /domain
