@@ -19,3 +19,9 @@ ipconfig /renew
 systeminfo
 arp -a
 whoami
+
+# Windows GUI consoles
+lusrmgr.msc   # Local User Manager Gui 
+control       # Control Panel 
+secpol.msc    # Local Security Policy for firewalls, Accounts, etc
+eventvwr.msc  # Event Viewer
