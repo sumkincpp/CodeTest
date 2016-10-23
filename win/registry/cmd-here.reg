@@ -1,0 +1,10 @@
+# found here -> https://github.com/gazalem/scripts/blob/master/cmdHere.reg
+Windows Registry Editor Version 5.00
+[HKEY_CLASSES_ROOTDirectoryshellCommandPrompt]
+@="Open Command Window Here"
+[HKEY_CLASSES_ROOTDirectoryshellCommandPromptcommand]
+@="cmd.exe /k pushd %L"
+[HKEY_CLASSES_ROOTDriveshellCommandPrompt]
+@="Open Command Window Here"
+[HKEY_CLASSES_ROOTDriveshellCommandPromptcommand]
+@="cmd.exe /k pushd %L"
