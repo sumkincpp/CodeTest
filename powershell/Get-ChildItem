@@ -1,0 +1,3 @@
+Get-ChildItem "." -Filter *.zip | ForEach-Object {
+    unzip -x $_.FullName
+}
