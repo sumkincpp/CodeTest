@@ -121,6 +121,10 @@ git reset --mixed <my-branch> <other-commit>
 # deletes LOCAL changes(all uncommittted)
 git reset --hard <my-branch> <other-commit>
 
+# When u need to reset initial commit, move HEAD before 1 commit(???)
+# after that there is force available
+git update-ref -d HEAD
+
 #------------------------------------------------------------------------
 # overwriting file with PREVIOUSLY committed version
 git checkout -- HELLOW
