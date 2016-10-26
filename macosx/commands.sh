@@ -9,8 +9,8 @@ Password for fedor:
 
 
 # Specifying Screenshots folder in Mac OS X
-fedor@Fedors-MacBook-Pro:~$ defaults write com.apple.screencapture location ~/Pictures/Screenshots/
-fedor@Fedors-MacBook-Pro:~$ killall SystemUIServer
+$ defaults write com.apple.screencapture location ~/Pictures/Screenshots/
+$ killall SystemUIServer
 
 # Full path in title
 $ defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
@@ -20,3 +20,10 @@ $ osascript -e 'tell app "Finder" to quit'
 caffeinate -u -t 36000
 
 networksetup -removeallpreferredwirelessnetworks en1
+
+# Add / remove readonly attribute
+sudo chflags schg file
+sudo chflags noschg file
+# for local user
+chflags uchg file
+chflags nouchg file
