@@ -1,7 +1,7 @@
 resource:///chrome/en-US/locale/browser/searchplugins/
 view-source:resource:///chrome/en-US/locale/browser/searchplugins/google.xml
 
-============================================================================================================
+```xml
 <!-- This Source Code Form is subject to the terms of the Mozilla Public
    - License, v. 2.0. If a copy of the MPL was not distributed with this
    - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
@@ -20,4 +20,4 @@ view-source:resource:///chrome/en-US/locale/browser/searchplugins/google.xml
   <MozParam name="client" condition="purpose" purpose="searchbar" value="firefox-b"/>
 </Url>
 </SearchPlugin>
-============================================================================================================
+```
