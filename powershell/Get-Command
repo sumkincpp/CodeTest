@@ -1,0 +1,9 @@
+PS > Get-Command notepad.exe
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Application     notepad.exe                                        10.0.14... C:\Windows\system32\notepad.exe
+
+
+PS > Get-Command notepad.exe | Select-Object -ExpandProperty Definition
+C:\Windows\system32\notepad.exe
