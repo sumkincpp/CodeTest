@@ -3,6 +3,10 @@ Wake up assertions :
 ```sh
 pmset -g assertions
 ```
+And grep log :
+```
+pmset -g log | grep ' Wake '
+```
 Check reasons for wake up in syslog
 ```sh
 syslog | grep -i "Wake reason"
