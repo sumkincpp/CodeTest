@@ -69,3 +69,6 @@ SEED-SHA                SSLv3 Kx=RSA      Au=RSA  Enc=SEED(128) Mac=SHA1
 openssl s_client -connect localhost:5555 -sslv2
 openssl s_client -connect localhost:5555 -sslv3
 openssl s_client -connect localhost:5555 -tls1
+
+# Generating MAC address with openssl (useful!)
+openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
