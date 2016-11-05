@@ -1,0 +1,21 @@
+#!/bin/bash
+
+sudo launchctl unload -F /System/Library/LaunchDaemons/tftp.plist
+
+sudo launchctl load -F /System/Library/LaunchDaemons/tftp.plist
+
+case "$1" in
+    start)
+        echo "Start tftpd service..."
+        sudo launchctl start com.apple.tftpd
+        ;;
+    stop)
+        echo "Stop tftpd service..."
+        sudo launchctl stop com.apple.tftpd
+        ;;
+    *)
+        echo "Start tftpd service..."
+        sudo launchctl start com.apple.tftpd
+        ;;
+esac
+
