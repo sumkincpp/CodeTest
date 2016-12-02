@@ -8,3 +8,6 @@ $env:computername
 Hostname
 (Get-WmiObject -Class Win32_ComputerSystem -Property Name).Name
 get-childitem -path env:computername
+
+PS C:/> (Get-Date).ToString("yyyyMMdd")
+20161202
