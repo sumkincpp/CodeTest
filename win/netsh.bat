@@ -30,3 +30,10 @@ netsh firewall show port
 netsh firewall show config
 
 netsh firewall set portopening protocol = TCP port = 1434 name = SQLPort mode = ENABLE scope = SUBNET profile = CURRENT
+
+rem Allow win10 services to use internet
+
+netsh advfirewall firewall add rule name="+ Windows - InstallAgentUserBroker" dir=out action=allow program="%SystemRoot%\System32\installagentuserbroker.exe" enable=yes profile=any remoteport=80,443 protocol=tcp
+netsh advfirewall firewall add rule name="+ Windows - SystemSettings" dir=out action=allow program="%SystemRoot%\immersivecontrolpanel\systemsettings.exe" enable=yes profile=any remoteport=80,443 protocol=tcp
+netsh advfirewall firewall add rule name="+ Windows - SmartScreen" dir=out action=allow program="%SystemRoot%\System32\smartscreen.exe" enable=yes profile=any remoteport=80,443 protocol=tcp
+netsh advfirewall firewall add rule name="+ Windows - GamebarPresenceWriter" dir=out action=allow program="%SystemRoot%\System32\gamebarpresencewriter.exe" enable=yes profile=any remoteport=80,443 protocol=tcp
