@@ -4,7 +4,7 @@ wmic startup
 wmic useraccount list
 wmic group list full
 
-wmic diskdrive get status
+wmic diskdrive get status # usefull! check disk statuses
 wmic bios get serialnumber
 wmic logicaldisk get name, volumename
 wmic Memcache list brief
