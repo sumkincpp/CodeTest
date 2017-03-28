@@ -1,3 +1,12 @@
+# grepping with line numbers
+grep -n blablabla
+
+# grepping and printing only matched files
+grep -L blablabla
+
+# grepping and printing only matches itself, -h, --no-filename
+grep -h blabalba
+
 # grepping without filename (flag -h)
 grep -h blabla .
 
