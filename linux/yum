@@ -6,3 +6,6 @@ python -c 'import yum, pprint; yb = yum.YumBase(); pprint.pprint(yb.conf.yumvar,
  'releasever': '5',
  'yum0': '200',
  'yum5': 'foo'}
+
+# reinstall pkts
+yum reinstall $(rpm -qa --qf="%{N}-%{V}\n" | sort | grep -v kernel-core)
