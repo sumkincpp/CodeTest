@@ -1,3 +1,4 @@
+```
 C:\>net statistics server
 Server Statistics for \\XXX
 
@@ -72,3 +73,4 @@ Get-WinEvent -ProviderName eventlog | Where-Object {$_.Id -eq 6005 -or $_.Id -eq
 
 
 C:\> systeminfo | find "System Boot Time:"
+```
