@@ -73,4 +73,5 @@ Get-WinEvent -ProviderName eventlog | Where-Object {$_.Id -eq 6005 -or $_.Id -eq
 
 
 C:\> systeminfo | find "System Boot Time:"
+System Boot Time:          22.05.2017, 14:47:07
 ```
