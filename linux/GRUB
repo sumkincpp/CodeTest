@@ -1,0 +1,3 @@
+# GRUB boot options
+init=/bin/sh
+quiet|noquiet
