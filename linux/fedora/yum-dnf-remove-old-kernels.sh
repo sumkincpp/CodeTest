@@ -8,3 +8,7 @@ Leave only 5 latest kernels ->
 
 /etc/yum.conf, /etc/dnf/dnf.conf
 installonly_limit=5
+
+
+# DNF approach, keeping latest 2 kernels
+sudo dnf remove $(dnf repoquery --installonly --latest-limit=-2 -q)
