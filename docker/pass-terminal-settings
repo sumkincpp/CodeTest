@@ -1,0 +1,2 @@
+docker run --rm -it -e COLUMNS=$COLUMNS -e LINES=$LINES -e TERM=$TERM -it ubuntu:16.04 tput lines
+docker exec -e COLUMNS=$COLUMNS -e LINES=$LINES -e TERM=$TERM -it hlwo /bin/bash
