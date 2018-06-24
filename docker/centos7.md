@@ -1,6 +1,6 @@
 # Installing obsolete 17.03.2
 
-I.e. package renaming won't allow :
+I.e. due to package renaming, it can't be installed :
 ```bash
 [root@k8s-master ~]# yum install docker-ce-17.03.2.ce-1.el7.centos docker-ce-selinux-17.03.2.ce-1.el7.centos.noarch
 Loaded plugins: fastestmirror
@@ -34,7 +34,7 @@ Error: Package: docker-ce-17.03.2.ce-1.el7.centos.x86_64 (docker-ce-stable)
  You could try running: rpm -Va --nofiles --nodigest
 ```
 
-But this will work
+But this will work :
 ```bash
 yum install --setopt=obsoletes=0 \
    docker-ce-17.03.2.ce-1.el7.centos.x86_64 \
