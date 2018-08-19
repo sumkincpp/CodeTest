@@ -144,3 +144,11 @@ git diff HEAD~2 spin_glass_counter.hpp
 
 # show file on -2 revision
 git show HEAD~2:./spin_glass_counter.hpp
+
+## Other useful commadns ##
+
+# show what files are changed
+git log --name-only
+
+# working tree status with all files
+git status -uall
