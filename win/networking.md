@@ -1,9 +1,12 @@
 
 # windows routes
+```
 route print
 netstat -rn
+```
 
-
+# Network Configuration
+```
 netsh interface ipv4 show interfaces
 netsh interface ip show config
 netsh interface show interface
@@ -32,3 +35,4 @@ wmic nicconfig where "(IPEnabled=TRUE) and (Description = 'Local Area Connection
 
 Another example for setting the domain search list:
 wmic nicconfig call SetDNSSuffixSearchOrder ("domain.tld")
+```
