@@ -134,6 +134,8 @@ git config --global alias.lol "log --oneline --graph --decorate --all"
 # git lol
 git config --global alias.co "commit -m"
 # git co "message"
+
+git config --global --unset alias.lol
 #------------------------------------------------------------------------
 
 # clone with one commit depth
@@ -152,3 +154,6 @@ git log --name-only
 
 # working tree status with all files
 git status -uall
+
+# Git patches archive (from commit to HEAD)
+git diff --name-only -z --diff-filter=ACMRT fa3de33a4 | xargs -0 git archive -o update.tar.gz HEAD --
