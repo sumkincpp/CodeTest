@@ -148,6 +148,7 @@ git diff HEAD~2 spin_glass_counter.hpp
 git show HEAD~2:./spin_glass_counter.hpp
 
 ## Other useful commadns ##
+git log --oneline
 
 # show what files are changed
 git log --name-only
