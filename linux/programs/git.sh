@@ -153,6 +153,9 @@ git log --oneline
 # show what files are changed
 git log --name-only
 
+# Changes in your branch that are on top of master
+git log master.. --oneline
+
 # working tree status with all files
 git status -uall
 
