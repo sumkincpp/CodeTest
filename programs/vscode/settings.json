@@ -1,0 +1,59 @@
+{
+    "atomKeymap.promptV3Features": true,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.formatOnPaste": true,
+    "python.linting.pycodestylePath": "C:\\Users\\PIU-PIU-PIU\\AppData\\Local\\Continuum\\anaconda2\\Scripts\\pep8.exe",
+    "editor.suggestSelection": "first",
+    "editor.renderWhitespace": "selection",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.jediEnabled": false,
+    "files.trimTrailingWhitespace": true,
+    "python.formatting.provider": "autopep8",
+    // "python.formatting.provider": "yapf",
+    "editor.formatOnSave": true,
+    "window.zoomLevel": 0,
+    "kite.showWelcomeNotificationOnStartup": false,
+    // E402 - disable import formatting
+    "python.formatting.autopep8Args": [
+        "--max-line-length=160",
+        "--ignore",
+        "E402"
+    ],
+    "workbench.tree.indent": 20,
+    "files.associations": {
+        "./**/*.sh": "bash"
+    },
+    "editor.tabSize": 2,
+    "[python]": {
+        "editor.tabSize": 4
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[yaml]": {
+        "editor.tabSize": 2
+    },
+    "[json]": {
+        "editor.tabSize": 2
+    },
+    "[shellscript]": {
+        "editor.tabSize": 2,
+        "files.insertFinalNewline": false
+    },
+    "[perl]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4,
+        "editor.autoIndent": false
+    },
+    "gitlens.views.fileHistory.enabled": true,
+    "gitlens.views.lineHistory.enabled": true,
+    "gitlens.advanced.messages": {
+        "suppressShowKeyBindingsNotice": true
+    },
+    "files.insertFinalNewline": true,
+    // New files with non-windows EOLS
+    "files.eol": "\n",
+    "python.dataScience.sendSelectionToInteractiveWindow": false,
+    "search.location": "sidebar",
+    "python.condaPath": "C:\\Users\\PIU-PIU-PIU\\AppData\\Local\\Continuum\\anaconda3\\Scripts"
+}
