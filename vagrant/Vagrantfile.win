@@ -9,7 +9,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.guest = :windows 
 
   #config.vm.hostname = "newton"
-
+  # 
+  config.vm.synced_folder` ".", "/vagrant", type: "virtualbox"
+  
   config.vm.network :public_network, ip: "1.1.1.1", :bridge => "Realtek PCIe GBE Family Controller", :adapter => 2
   config.ssh.insert_key = false
   config.ssh.username = "piupiupiu"
