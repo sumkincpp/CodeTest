@@ -34,3 +34,10 @@ Icon?
 Thumbs.db
 
 temp/*
+
+# Python files #
+################
+.mypy_cache
+__pycache__
+.pytest_cache
+.vscode
