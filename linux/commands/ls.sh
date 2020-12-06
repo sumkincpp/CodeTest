@@ -4,3 +4,7 @@ ls -F | grep -v '/'
 
 # -p --- append / indicator to directories
 ls -p | grep -v '/'
+
+
+# list line by line
+ls -1a
