@@ -1,0 +1,58 @@
+{
+    "C_Cpp.updateChannel": "Insiders",
+    "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\wsl.exe",
+    "terminal.integrated.inheritEnv": false,
+    "python.dataScience.sendSelectionToInteractiveWindow": false,
+    "python.linting.pylintPath": "C:\\Users\\fedor\\Anaconda3\\Scripts\\pylint.exe",
+    "python.linting.pycodestylePath": "C:\\Users\\fedor\\Anaconda3\\Scripts\\pycodestyle.exe",
+    "python.linting.pycodestyleEnabled": true,
+    "files.trimFinalNewlines": true,
+    "files.trimTrailingWhitespace": true,
+    "python.formatting.autopep8Path": "C:\\Users\\fedor\\Anaconda3\\Scripts\\autopep8.exe",
+    "autoDocstring.docstringFormat": "sphinx",
+    "[python]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.formatOnSave": true
+    },
+    "python.formatting.autopep8Args": [
+        "--max-line-length", "140",
+        "--ignore", "E251",
+        "--ignore", "E402", // module level import not at top of file.
+//        "--ignore", "E251", // unexpected spaces around keyword / parameter equals
+//        "--load-plugins", "pylint_django"
+    ],
+    "python.linting.pycodestyleArgs": [
+        "--max-line-length=140",
+        "--ignore=D400",
+        "--ignore=D4"
+    ],
+    "python.linting.pycodestyleCategorySeverity.E": "Information",
+    "window.zoomLevel": 1,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "remote.SSH.remotePlatform": {
+        "centos7-dev": "linux",
+        "ubuntu-2004": "linux"
+    },
+    "git.ignoreLegacyWarning": true,
+    "files.exclude": {
+        ".mypy_cache": true,
+        "**/__pycache__": true,
+        "**/.mypy_cache": true,
+        "**/.pytest_cache": true
+    },
+    "python.linting.mypyEnabled": true,
+    "python.formatting.blackArgs": [
+        "--skip-string-normalization"
+    ],
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "search.exclude": {    },
+    "python.formatting.provider": "black"
+}
