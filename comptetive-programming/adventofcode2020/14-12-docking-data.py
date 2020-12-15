@@ -45,40 +45,45 @@ def test_yield_binary(n, e):
     assert list(yield_binary(n)) == e
 
 
-def yield_x_binary(n):
+def expand_binary_pattern(n: str):
     """
-    Simple and greedy X expansion
+    Expands binary string pattern and yields all possible variants
+
+    Example:
+        X -> 0 and 1
+        1X -> 10 and 11 in binary -> 3 and 4
+
+    :param n: pattern with 0, 1, X, example: 10101X0XX
+    :type n: str
+    :yield: number variant
     """
+
     numbers = [n]
 
-    new_numbers = []
-
     while numbers:
-        current = numbers[0]
+        current = numbers.pop()
+
+        print(current)
         X_index = current.find("X")
 
         if X_index == -1:
-            for n in numbers:
-                yield int(n, 2)
-            return
-
-        new_numbers = []
-        for n in numbers:
-            new_numbers.append(n.replace("X", "1", 1))
-            new_numbers.append(n.replace("X", "0", 1))
-
-        numbers = new_numbers
+            yield int(current, 2)
+        else:
+            numbers.append(current.replace("X", "1", 1))
+            numbers.append(current.replace("X", "0", 1))
 
 
 @pytest.mark.parametrize(
     "n,e",
     [
-        ("X", [1, 0]),
-        ("XX", [3, 2, 1, 0]),
+        ("1000X", [16, 17]),
+        ("1X", [3, 4]),
+        ("X", [0, 1]),
+        ("XX", [0, 1, 2, 3]),
     ],
 )
-def test_yield_x_binary(n, e):
-    assert list(yield_x_binary(n)) == e
+def test_expand_binary_pattern(n, e):
+    assert list(expand_binary_pattern(n)) == e
 
 
 ##################################################################################
@@ -185,7 +190,7 @@ def docking_data_part2(iterator):
 
         res_str = "".join(result)
 
-        for a in yield_x_binary(res_str):
+        for a in expand_binary_pattern(res_str):
             addresses[a] = int(value)
 
     return sum(addresses.values())
