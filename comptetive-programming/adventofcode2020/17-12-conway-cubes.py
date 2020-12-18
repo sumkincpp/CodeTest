@@ -39,20 +39,6 @@ def minmax(it):
     return min, max
 
 
-def minmax_matrix(data, x):
-    if not data:
-        return None, None
-
-    return minmax(
-        chain.from_iterable([
-            data.get(x - 1, {}).keys(),
-            data.get(x, {}).keys(),
-            data.get(x + 1, {}).keys()
-        ]
-        )
-    )
-
-
 def get_coord(x_cube, coord):
     curr = x_cube
     for c in coord[:-1]:
@@ -77,7 +63,7 @@ def is_activated(x_cube, coord):
 
     nbrs = 0
 
-    coords_expanded = [list(range(c - 1, c + 2)) for c in coord]
+    coords_expanded = [range(c - 1, c + 2) for c in coord]
 
     for coord in itertools.product(*coords_expanded):
         if get_coord(x_cube, coord) == "#":
@@ -100,7 +86,7 @@ def x_cube_level_size(x_cube, dimension):
 
 def x_cube_level_size_it_conway(x_cube, dimension):
     """
-    Special max min version which start from min-1 to max+1,
+    Special max min version which start from min-1 to max+2,
     that can be used in range
     """
     min_d, max_d = x_cube_level_size(x_cube, dimension)
@@ -138,10 +124,6 @@ def coords_iterator(cube, dimensions):
         coords_iterators.append(range(*minmax))
 
     return itertools.product(*coords_iterators)
-
-    # total = sum(len(row)
-    #             for matrix in cube.values()
-    #             for row in matrix.values())
 
 
 def cube_values(x_cube, dimensions):
