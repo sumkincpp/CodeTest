@@ -26,13 +26,11 @@ def get_neihbours(matrix, y, x):
     size_y = len(matrix)
     size_x = len(matrix[0])
 
-    for y_ in range(y - 1, y + 2):
-        for x_ in range(x - 1, x + 2):
-            if x_ < 0 or x_ >= size_x:
-                continue
+    from_x, to_x = max(x - 1, 0), min(x + 2, size_x)
+    from_y, to_y = max(y - 1, 0), min(y + 2, size_y)
 
-            if y_ < 0 or y_ >= size_y:
-                continue
+    for y_ in range(from_y, to_y):
+        for x_ in range(from_x, to_x):
 
             if x_ == x and y_ == y:
                 # thats seat self
