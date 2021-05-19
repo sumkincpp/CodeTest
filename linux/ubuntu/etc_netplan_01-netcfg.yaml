@@ -1,0 +1,9 @@
+# /etc/netplan/01-netcfg.yaml
+# sudo netplan apply
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+      nameservers:
+        addresses: [1.1.1.1]
