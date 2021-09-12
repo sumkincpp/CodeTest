@@ -11,3 +11,6 @@ get-childitem -path env:computername
 
 PS C:/> (Get-Date).ToString("yyyyMMdd")
 20161202
+
+# Random pasword 
+> -join((("abcdefghiklmnoprstuvwxyzABCDEFGHKLMNPRSTUVWXYZ123456789".ToCharArray()|Get-Random -Count 8) + ("1234567890".ToCharArray()|Get-Random -Count 2) + ('!"§$%&/()=?}][{@#*+'.ToCharArray()|Get-Random -Count 1) ) | Sort-Object {Get-Random})
