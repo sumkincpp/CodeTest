@@ -15,3 +15,6 @@ sed -n '/hehee/{10n;p;}' target.file
 
 #delete empty lines
 sed '/^$/d'
+
+# dos2unix
+sed -e 's/\r//g'
