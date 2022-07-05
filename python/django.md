@@ -11,3 +11,14 @@ python3 manage.py loaddata data.json
 ```
 pip3 install django-registration
 ```
+
+```
+python manage.py shell
+
+from django.contrib.auth.models import User
+user = User.objects.get(username='your username')
+user.set_password('raw password')
+user.save()
+
+python manage.py changepassword <user>
+```
