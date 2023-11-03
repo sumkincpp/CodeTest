@@ -1,0 +1,14 @@
+FROM ubuntu:22.04
+
+ENV ENVSUBST_VERSION=v1.4.2
+ENV TARGETPLATFORM=linux/amd64
+
+# XXX: golang version is here old
+# see https://github.com/a8m/envsubst
+RUN case ${TARGETPLATFORM} in \
+         "linux/amd64")  ENVSUBST_ARCH=Linux-x86_64; ENVSUBST_SHA256=a216fad03fb21a5459f57b3e8e02598679229d52e4b24d0c6ed0c46d90d5af3b ;; \
+         "linux/arm64")  ENVSUBST_ARCH=Linux-arm64 ; ENVSUBST_SHA256=701b940247ab3b6f99d1de0b2199ec80828f90922d467b36f98ba8af4c998e48 ;; \
+    esac \
+   && curl -L https://github.com/a8m/envsubst/releases/download/${ENVSUBST_VERSION}/envsubst-${ENVSUBST_ARCH} -o /usr/local/bin/envsubst \
+   && echo "$ENVSUBST_SHA256 /usr/local/bin/envsubst" | sha256sum --check --status --strict - \
+   && chmod +x /usr/local/bin/envsubst
