@@ -29,9 +29,10 @@ Times buffers exhausted
   Request buffers                  0
 
 The command completed successfully.
+```
 
 
-
+```
 C:\>net statistics workstation
 Workstation Statistics for \\XXX
 
@@ -59,19 +60,29 @@ Statistics since 22.05.2017 14:47:53
   Failed operations                            0
   Use count                                    12887
   Failed use count                             9
+```
 
 The command completed successfully.
 
-
+```
 C:\>wmic os get lastbootuptime
 LastBootUpTime
 20170522144707.610798+180
 
+C:\>wmic path Win32_OperatingSystem get LastBootUpTime
+LastBootUpTime
+20170522144707.610798+180
+```
+
 
 Powershell :
+
+```
 Get-WinEvent -ProviderName eventlog | Where-Object {$_.Id -eq 6005 -or $_.Id -eq 6006}
+```
 
 
+```
 C:\> systeminfo | find "System Boot Time:"
 System Boot Time:          22.05.2017, 14:47:07
 ```
