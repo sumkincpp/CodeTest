@@ -1,5 +1,12 @@
 # Kubernetes
 
+## kubectl
+
+```
+alias kubectl="minikube kubectl --"
+ln -s $(which minikube) ~/.local/bin/kubectl
+```
+
 ## Cluster Status
 
 ```bash
