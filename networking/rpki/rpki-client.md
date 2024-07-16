@@ -1,7 +1,7 @@
 # rpki-client
 
 ```bash
-troadm@f33a6ac19a1c:/volume/rpkiclient/cache$ rpki-client -d . -f rpki.cnnic.cn/rpki/A9162E3D0000/BBYptqnqt8sTJOo5ePA3lviJtUA.mft 
+$ rpki-client -d . -f rpki.cnnic.cn/rpki/A9162E3D0000/BBYptqnqt8sTJOo5ePA3lviJtUA.mft 
 File:                     rpki.cnnic.cn/rpki/A9162E3D0000/BBYptqnqt8sTJOo5ePA3lviJtUA.mft
 Hash identifier:          mmEfAmsUU3nk15HP6Foo5prtkeoCnRliazzLh930Tm0=
 rpki-client: parse file rpki.cnnic.cn/rpki/A9162E3D0000/BBYptqnqt8sTJOo5ePA3lviJtUA.crl: No such file or directory
