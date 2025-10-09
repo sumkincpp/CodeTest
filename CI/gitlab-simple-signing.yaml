@@ -1,0 +1,48 @@
+.rules-release-branches-or-manual: &rules-release-branches-or-manual
+  rules:
+    # do not detach task as a single pipeline
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    # Main
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      when: on_success
+    # Release Branches, i.e. v2.4.x and Tags, i.e. v2.4.0rc1
+    - if: '$CI_COMMIT_REF_NAME =~ /^v[^-]+$/'
+      when: on_success
+    # Finally manually
+    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+      when: manual
+      allow_failure: true
+
+pre:poweradmin:
+  stage: build
+  image: alpine/git:latest
+  script:
+    - git clone ${POWERADMIN_REPOSITORY} --branch ${POWERADMIN_TAG} --depth 1 poweradmin
+    - tar -czf poweradmin.tar.gz poweradmin/
+    # Create keyed hash: hash(file + secret)
+    - (cat poweradmin.tar.gz; echo "${ARTIFACT_SIGNATURE_SECRET}") | sha256sum | awk '{print $1}' > poweradmin.tar.gz.sig
+  artifacts:
+    paths:
+      - poweradmin.tar.gz
+      - poweradmin.tar.gz.sig
+    expire_in: 1 hour
+  <<: *rules-release-branches-or-manual
+
+build:poweradmin:
+  needs: [pre:poweradmin]
+  before_script:
+    - EXPECTED_SIG=$(cat poweradmin.tar.gz.sig)
+    - ACTUAL_SIG=$(sh -c 'cat poweradmin.tar.gz; echo "${ARTIFACT_SIGNATURE_SECRET}"' | sha256sum | awk '{print $1}')
+    - |
+      if [ "${EXPECTED_SIG}" != "${ACTUAL_SIG}" ]; then
+        echo "❌ Signature verification failed!"
+        exit 1
+      fi
+      echo "✅ Signature verified"
+    - tar -xzf poweradmin.tar.gz
+  rules:
+    # do not detach task as a single pipeline
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - when: on_success
