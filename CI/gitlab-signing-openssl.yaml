@@ -1,0 +1,40 @@
+################################################################################################
+# Consider: we have only tar and openssl in my-tool:latest image 
+################################################################################################
+.rules-manual: &rules-manual
+  rules:
+    # do not detach task as a single pipeline
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - when: manual
+      allow_failure: true
+
+prepare:
+  image: alpine:3.22
+  stage: production
+  script:
+    - apk add openssl git
+    - git clone ${GIT_URL} --branch ${GIT_REVISION} --depth 1 archive
+    - tar czf - archive/ | openssl enc -aes-256-cbc -pbkdf2 -pass pass:${ARTIFACT_SIGNATURE_SECRET} -out archive.tar.gz.enc
+  artifacts:
+    paths:
+      - archive.tar.gz.enc
+    expire_in: 1 hour
+  <<: *rules-manual
+
+provision:
+  needs: [prepare]
+  image: my-tool:latest
+  script: |
+    set -euxo pipefail
+
+    openssl enc -aes-256-cbc -pbkdf2 -d -pass pass:${ARTIFACT_SIGNATURE_SECRET} -in archive.tar.gz.enc | tar xzf -
+
+    ls archive/
+
+    my-tool --data archive check
+  rules:
+    # do not detach task as a single pipeline
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: never
+    - when: on_success
