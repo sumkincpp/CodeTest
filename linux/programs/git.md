@@ -188,3 +188,16 @@ git rebase -i KEKEK --exec 'git commit --amend --author="NOPE <email@address.com
 git rebase -i origin/main --exec 'GIT_COMMITTER_DATE="$(date)" git commit --amend --no-edit --date="$(date)"'
 ```
 
+# Find file in history and check it out
+
+Find file with specific string in git history
+
+```bash
+git log -S String-we-search file.py
+```
+
+Check it out
+
+```bash
+git show e3032bdd284a3a345f5068e0863410783647b5c3:file.py > file.100.py
+```
