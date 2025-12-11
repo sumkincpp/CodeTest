@@ -201,3 +201,10 @@ Check it out
 ```bash
 git show e3032bdd284a3a345f5068e0863410783647b5c3:file.py > file.100.py
 ```
+
+# Some default 
+
+```
+git config --global credential.helper "cache --timeout=28800"
+git config --global core.editor "vim"
+```
