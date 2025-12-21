@@ -39,3 +39,11 @@ adding editable library
 ```
 uv pip install -e add path_to_local_project
 ```
+
+## uv project env
+
+Force using specified folder for venv.
+
+```
+export UV_PROJECT_ENVIRONMENT=.venv2
+```
