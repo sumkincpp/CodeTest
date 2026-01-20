@@ -1,4 +1,10 @@
 
+# calibre pdf to txt
+
+```bash
+find . -iname '*.pdf' -exec bash -c 'ebook-convert "$1" "${1%.pdf}.txt"' _ {} \;
+```
+
 # Renaming file according to the pattern
 
 ```bash
