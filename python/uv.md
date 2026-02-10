@@ -28,17 +28,24 @@ Install for all users (/usr/local/bin)
 sudo curl -LsSf https://astral.sh/uv/install.sh | sudo env UV_INSTALL_DIR="/usr/local/bin/" sh
 ```
 
+adding editable library
+
+```
+uv pip install -e add path_to_local_project
+```
+
+### uv tool
+
 Install python tool to custom folder
 
 ```bash
 UV_TOOL_BIN_DIR=/usr/local/bin uv tool install foo
 ```
 
-adding editable library
+```
+uv tool install "git+https://github.com/ansible/awx.git#egg=awxkit&subdirectory=awxkit"
+```
 
-```
-uv pip install -e add path_to_local_project
-```
 
 ## uv project env
 
