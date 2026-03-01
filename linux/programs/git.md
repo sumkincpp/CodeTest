@@ -206,6 +206,20 @@ Check it out
 git show e3032bdd284a3a345f5068e0863410783647b5c3:file.py > file.100.py
 ```
 
+# Github Identity
+
+See, using multiple repositories
+https://docs.github.com/de/authentication/connecting-to-github-with-ssh/managing-deploy-keys#using-multiple-repositories-on-one-server
+
+```
+Host github.com-repo-0
+        Hostname github.com
+        IdentityFile=/home/user/.ssh/repo-0_deploy_key
+
+Host github.com-repo-1
+        Hostname github.com
+        IdentityFile=/home/user/.ssh/repo-1_deploy_key
+```
 # Some default 
 
 ```
