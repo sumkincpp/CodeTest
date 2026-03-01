@@ -181,6 +181,10 @@ git diff --name-only -z --diff-filter=ACMRT fa3de33a4 | xargs -0 git archive -o 
 # Git rebase
 
 ```
+git rebase -i KEKEK --exec 'git commit --amend --reset-author --no-edit'
+```
+
+```
 git rebase -i KEKEK --exec 'git commit --amend --author="NOPE <email@address.com>" --no-edit'
 ```
 
