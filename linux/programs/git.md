@@ -226,3 +226,18 @@ Host github.com-repo-1
 git config --global credential.helper "cache --timeout=28800"
 git config --global core.editor "vim"
 ```
+
+# Finding which files were not changed, but spaces changed
+
+This one doesn't work due to bug in Git :D
+
+```
+$ comm -23 <(git diff --name-only | sort) <(git diff -w --name-only | sort)
+```
+
+This one works
+
+```
+$ git diff --name-only | while read f; do   git diff -w -- "$f" | grep -q '^[+-]' || echo "$f"; done
+index.js
+```
