@@ -54,3 +54,9 @@ Force using specified folder for venv.
 ```
 export UV_PROJECT_ENVIRONMENT=.venv2
 ```
+
+Forcing to download python (it will be downloaded to ~/.local/share/uv/python)
+
+```
+uv venv --python 3.14 --managed-python
+```
