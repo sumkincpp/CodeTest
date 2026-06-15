@@ -1,3 +1,15 @@
+# GREP
+
+| Command | Description | Example Output |
+|----------|-------------|----------------|
+| `grep -r -l "CONTENT" .` | Show only filenames that contain `CONTENT`. | `app.log` |
+| `grep -r "CONTENT" .`    | Show matching lines containing `CONTENT`. | `app.log:CONTENT found` |
+| `grep -r -h "CONTENT" .` | Show matching lines without filenames. | `CONTENT found` |
+| `grep -r -c "CONTENT" .` | Count matching lines per file. | `app.log:3` |
+| `grep -r -v "CONTENT" .` | Show lines that do **not** contain `CONTENT`. | `INFO startup complete` |
+| `grep -r -L "CONTENT" .` | Show only filenames that do **not** contain `CONTENT`. | `README.md` |
+
+```bash
 # grepping with line numbers
 grep -n blablabla
 
@@ -40,3 +52,4 @@ tail -f file | grep --line-buffered my_pattern
 # https://stackoverflow.com/questions/9988379/how-to-grep-a-text-file-which-contains-some-binary-data
 grep -a
 grep --binary-files=text
+```
