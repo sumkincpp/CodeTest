@@ -60,3 +60,9 @@ Forcing to download python (it will be downloaded to ~/.local/share/uv/python)
 ```
 uv venv --python 3.14 --managed-python
 ```
+
+# Remove all venv-s xD
+
+```bash
+find . -type d -iname .venv -prune -exec rm -rf -- {} +
+```
