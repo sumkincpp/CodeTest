@@ -66,3 +66,12 @@ uv venv --python 3.14 --managed-python
 ```bash
 find . -type d -iname .venv -prune -exec rm -rf -- {} +
 ```
+
+Windows
+
+```bash
+# dry run
+Get-ChildItem -Path . -Directory -Filter ".venv" -Recurse | Select-Object -ExpandProperty FullName
+# removal
+Get-ChildItem -Path . -Directory -Filter ".venv" -Recurse | Remove-Item -Recurse -Force
+```
