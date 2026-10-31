@@ -1,0 +1,157 @@
+{
+  "dashboards": [
+    {
+      "name": "Internal Services",
+      "rows": [
+        {
+          "title": "Core Services",
+          "subtitle": "Essential system components",
+          "max-width": 3,
+          "tiles": [
+            {
+              "title": "User Management",
+              "description": "Manage users and permissions",
+              "url": "{website_url}/users",
+              "symbol": "👥"
+            },
+            {
+              "title": "API Gateway",
+              "description": "API routing and management",
+              "url": "{api_base_url}/gateway",
+              "symbol": "🔗"
+            }
+          ]
+        },
+        {
+          "title": "Monitoring & Admin",
+          "subtitle": "System oversight and administration",
+          "tiles": [
+            {
+              "title": "Monitoring",
+              "description": "System health and metrics",
+              "url": "{monitoring_url}/dashboard",
+              "symbol": "📊"
+            },
+            {
+              "title": "Database Admin",
+              "description": "Database management tool",
+              "url": "{website_url}/admin/db",
+              "symbol": "🗄️"
+            },
+            {
+              "title": "Log Viewer",
+              "description": "Application logs and debugging",
+              "url": "{monitoring_url}/logs",
+              "symbol": "📋"
+            }
+          ]
+        },
+        {
+          "title": "Configuration",
+          "tiles": [
+            {
+              "title": "Config Manager",
+              "description": "System configuration",
+              "url": "{website_url}/admin/config",
+              "symbol": "⚙️"
+            },
+            {
+              "title": "Cache Admin",
+              "description": "Redis cache management",
+              "url": "{website_url}/admin/cache",
+              "symbol": "💾"
+            },
+            {
+              "title": "Security Settings",
+              "description": "Authentication and authorization",
+              "url": "{website_url}/admin/security",
+              "symbol": "🔒"
+            },
+            {
+              "title": "System Logs",
+              "description": "Server and application logs",
+              "url": "{website_url}/admin/logs",
+              "symbol": "📄"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Important Links",
+      "rows": [
+        {
+          "title": "Documentation",
+          "subtitle": "Project guides and references",
+          "tiles": [
+            {
+              "title": "Documentation",
+              "description": "Project documentation and guides",
+              "url": "{docs_url}",
+              "symbol": "📚"
+            },
+            {
+              "title": "GitHub Repository",
+              "description": "Source code and issues",
+              "url": "https://github.com/company/project",
+              "logo": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+            }
+          ]
+        },
+        {
+          "title": "Company Resources",
+          "subtitle": "Internal tools and support",
+          "tiles": [
+            {
+              "title": "Company Portal",
+              "description": "Internal company resources",
+              "url": "{website_url}/portal",
+              "symbol": "🏢"
+            },
+            {
+              "title": "API Documentation",
+              "description": "REST API reference",
+              "url": "{docs_url}/api",
+              "symbol": "🔌"
+            },
+            {
+              "title": "Support Portal",
+              "description": "Help desk and tickets",
+              "url": "{website_url}/support",
+              "symbol": "🎧"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "External Tools",
+      "rows": [
+        {
+          "title": "Third-party Services",
+          "subtitle": "External monitoring and cloud tools",
+          "tiles": [
+            {
+              "title": "AWS Console",
+              "description": "Cloud infrastructure management",
+              "url": "https://aws.amazon.com/console/",
+              "logo": "https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg"
+            },
+            {
+              "title": "DataDog",
+              "description": "Application performance monitoring",
+              "url": "https://app.datadoghq.com",
+              "symbol": "🐕"
+            },
+            {
+              "title": "Grafana",
+              "description": "Metrics and analytics dashboard",
+              "url": "{monitoring_url}/grafana",
+              "symbol": "📈"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

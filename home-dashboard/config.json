@@ -1,0 +1,7 @@
+{
+  "website_url": "https://company.example.com",
+  "api_base_url": "https://api.company.com",
+  "monitoring_url": "https://monitoring.company.com",
+  "docs_url": "https://docs.company.com",
+  "dashboard_title": "Service Dashboard"
+}

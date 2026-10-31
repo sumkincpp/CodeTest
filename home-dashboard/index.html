@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --text-light: #999999;
+            --border-color: #e0e0e0;
+            --tile-bg: #ffffff;
+            --tile-border: #333333;
+            --tile-hover-bg: #f9f9f9;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #121212;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-light: #888888;
+            --border-color: #404040;
+            --tile-bg: #2a2a2a;
+            --tile-border: #555555;
+            --tile-hover-bg: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.4;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            overflow-y: scroll;
+        }
+
+        .navbar {
+            background: var(--bg-primary) !important;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--text-primary) !important;
+            font-size: 1.25rem;
+        }
+
+        .nav-link {
+            color: var(--text-secondary) !important;
+            font-weight: 500;
+            padding: 0.75rem 1rem !important;
+            margin: 0 0.25rem;
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary) !important;
+            background: var(--bg-secondary);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary) !important;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .navbar-text {
+            color: var(--text-light) !important;
+            font-size: 0.875rem;
+        }
+
+        .container h2 {
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 1.875rem;
+            margin-bottom: 2rem;
+        }
+
+        .row-header {
+            margin-bottom: 1rem;
+        }
+
+        .row-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .row-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .tile {
+            display: block;
+            text-decoration: none;
+            background: var(--tile-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--tile-border);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            text-align: left;
+            height: 120px;
+            position: relative;
+        }
+
+        .tile:hover {
+            text-decoration: none;
+            color: var(--text-primary);
+            background: var(--tile-hover-bg);
+            border-color: var(--text-primary);
+        }
+
+        .tile-star {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            z-index: 10;
+            padding: 4px;
+            border-radius: 4px;
+        }
+
+        .tile-star:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] .tile-star:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .tile-star.favorited {
+            color: #fbbf24;
+        }
+
+        .tile-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            height: 100%;
+            width: 100%;
+        }
+
+        .tile-link:hover {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .tile.draggable {
+            cursor: grab;
+        }
+
+        .tile.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+        }
+
+        .tile.drag-over {
+            border-color: var(--text-primary);
+            background: var(--tile-hover-bg);
+        }
+
+        .favorites-actions {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .favorites-actions .btn {
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            border-radius: 6px;
+            background: var(--tile-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .favorites-actions .btn:hover {
+            background: var(--tile-hover-bg);
+            border-color: var(--tile-border);
+        }
+
+        .import-file-input {
+            display: none;
+        }
+
+        .custom-tile-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-tile-form {
+            background: var(--tile-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--tile-bg);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .custom-tile {
+            position: relative;
+        }
+
+        .custom-tile-actions {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .custom-tile-action {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .custom-tile:hover .custom-tile-action {
+            opacity: 1;
+        }
+
+        .custom-tile-action:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        @media (max-width: 970px) {
+            .tile-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .tile-logo {
+                width: 32px;
+                height: 32px;
+            }
+
+            .tile-logo .symbol {
+                font-size: 1.5rem;
+            }
+
+            .tile-title {
+                font-size: 0.9rem;
+                white-space: normal;
+                overflow: visible;
+                text-overflow: initial;
+            }
+
+            .tile-description {
+                font-size: 0.8rem;
+                -webkit-line-clamp: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tile {
+                height: 120px;
+                margin-bottom: 1rem;
+            }
+
+            .container h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .search-box {
+                width: 95%;
+                margin: 0 auto;
+            }
+
+            .tile-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.25rem;
+            }
+
+            .tile-logo {
+                width: 24px;
+                height: 24px;
+            }
+
+            .tile-logo .symbol {
+                font-size: 1.2rem;
+            }
+
+            .tile-title {
+                font-size: 0.85rem;
+            }
+
+            .tile-description {
+                font-size: 0.75rem;
+                -webkit-line-clamp: 1;
+            }
+        }
+
+        .custom-tile-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1060;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .custom-tile-form {
+            background: var(--tile-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--tile-bg);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--tile-border);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1.5rem;
+        }
+
+        .custom-tile {
+            position: relative;
+        }
+
+        .custom-tile .tile-actions {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            display: flex;
+            gap: 4px;
+        }
+
+        .tile-action-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+
+        .custom-tile:hover .tile-action-btn {
+            opacity: 1;
+        }
+
+        [data-theme="dark"] .tile-action-btn {
+            background: rgba(255, 255, 255, 0.7);
+            color: black;
+        }
+
+        .tile-content {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            gap: 1rem;
+        }
+
+        .tile-logo {
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tile-logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .tile-logo .symbol {
+            font-size: 2rem;
+            line-height: 1;
+        }
+
+        .tile-text {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .tile-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .tile-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .tile-no-logo .tile-content {
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+        }
+
+        .tile-no-logo .tile-title {
+            margin-bottom: 0.5rem;
+        }
+
+        .search-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1050;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 8vh;
+        }
+
+        .search-box {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+            border: 1px solid var(--tile-border);
+            border-radius: 8px;
+        }
+
+        .search-input {
+            border: none;
+            outline: none;
+            font-size: 1.125rem;
+            padding: 1.25rem 1.5rem;
+            width: 100%;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-light);
+        }
+
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .search-item {
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-item:hover, 
+        .search-item.active {
+            background-color: var(--bg-secondary);
+        }
+
+        .search-item strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .search-item .text-muted {
+            color: var(--text-secondary) !important;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        .alert {
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        .alert-danger {
+            background: #f8d7da;
+            color: #721c24;
+            border-color: #d1ecf1;
+        }
+
+        .alert-heading {
+            font-weight: 600;
+            color: #721c24;
+        }
+
+        .spinner-border {
+            width: 3rem;
+            height: 3rem;
+            border-color: var(--text-primary);
+            border-right-color: transparent;
+        }
+
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+
+        .theme-toggle {
+            background: var(--tile-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 6px;
+            padding: 0.25rem 0.5rem;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+
+        .theme-toggle:hover {
+            background: var(--tile-hover-bg);
+            border-color: var(--tile-border);
+            color: var(--text-primary);
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <span class="navbar-brand">{{ config.dashboard_title || 'Service Dashboard' }}</span>
+                <ul class="navbar-nav">
+                    <li class="nav-item" v-for="(dashboard, index) in allDashboards" :key="index">
+                        <a class="nav-link" 
+                           :class="{ active: selectedDashboard === index }"
+                           href="#" 
+                           @click.prevent="selectedDashboard = index">
+                            {{ dashboard.name }}
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center gap-3">
+                    <span class="navbar-text text-muted">Press Ctrl+P to search</span>
+                    <button @click="toggleTheme" class="btn btn-sm theme-toggle" :title="isDarkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+                        <span v-if="isDarkMode">☀️</span>
+                        <span v-else>🌙</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Loading State -->
+        <div v-if="loading" class="container mt-5 text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3 text-muted">Loading dashboard...</p>
+        </div>
+
+        <!-- Error State -->
+        <div v-else-if="error" class="container mt-5">
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Configuration Error</h4>
+                <p>{{ error }}</p>
+                <hr>
+                <p class="mb-0">Please ensure both <code>config.json</code> and <code>dashboard-config.json</code> files are present and properly formatted.</p>
+            </div>
+        </div>
+
+        <!-- Dashboard Content -->
+        <div v-else-if="allDashboards[selectedDashboard]" class="container mt-4">
+            <h2 class="mb-4">{{ allDashboards[selectedDashboard].name }}</h2>
+            
+            <div v-for="(row, rowIndex) in allDashboards[selectedDashboard].rows" :key="rowIndex" class="mb-4">
+                <div v-if="row.title || row.subtitle" class="row-header">
+                    <div v-if="row.title" class="row-title">{{ row.title }}</div>
+                    <div v-if="row.subtitle" class="row-subtitle">{{ row.subtitle }}</div>
+                </div>
+                
+                <div class="row">
+                    <div v-for="(tile, tileIndex) in row.tiles" 
+                         :key="tileIndex" 
+                         :class="getTileClass(tile, row)">
+                        <div class="tile"
+                             :class="{
+                                 'tile-no-logo': !tile.logo && !tile.symbol,
+                                 'draggable': isHomePage(),
+                                 'dragging': draggingTile === tile,
+                                 'drag-over': dragOverTile === tile,
+                                 'custom-tile': tile.type === 'custom'
+                             }"
+                             :style="getTileStyle(tile)"
+                             :draggable="isHomePage()"
+                             @dragstart="onDragStart($event, tile, rowIndex, tileIndex)"
+                             @dragend="onDragEnd"
+                             @dragover="onDragOver($event, tile, rowIndex, tileIndex)"
+                             @dragleave="onDragLeave"
+                             @drop="onDrop($event, rowIndex, tileIndex)">
+                            <!-- Custom tile actions -->
+                            <div v-if="tile.type === 'custom'" class="custom-tile-actions">
+                                <button 
+                                    class="custom-tile-action"
+                                    @click.stop="editCustomTile(tile)"
+                                    title="Edit tile">
+                                    ✏️
+                                </button>
+                                <button 
+                                    class="custom-tile-action"
+                                    @click.stop="deleteCustomTile(tile)"
+                                    title="Delete tile">
+                                    🗑️
+                                </button>
+                            </div>
+                            <!-- Star button for non-custom tiles -->
+                            <button v-if="tile.type !== 'custom'"
+                                class="tile-star"
+                                :class="{ favorited: isFavorited(tile) }"
+                                @click.stop="toggleFavorite(tile)"
+                                :title="isFavorited(tile) ? 'Remove from favorites' : 'Add to favorites'">
+                                {{ isFavorited(tile) ? '★' : '☆' }}
+                            </button>
+                            <a :href="resolveUrl(tile.url)" 
+                               target="_blank" 
+                               class="tile-link">
+                                <div class="tile-content">
+                                    <div v-if="tile.logo || tile.symbol" class="tile-logo">
+                                        <img v-if="tile.logo" :src="tile.logo" :alt="tile.title" />
+                                        <span v-else-if="tile.symbol" class="symbol">{{ tile.symbol }}</span>
+                                    </div>
+                                    <div class="tile-text">
+                                        <div class="tile-title">{{ tile.title }}</div>
+                                        <div v-if="tile.description" class="tile-description">{{ tile.description }}</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Export/Import Actions (Home page only) -->
+            <div v-if="isHomePage()" class="favorites-actions">
+                <button @click="showCustomTileModal = true" class="btn">
+                    ➕ Add Custom Tile
+                </button>
+                <button @click="exportFavorites" class="btn">
+                    📤 Export Favorites
+                </button>
+                <button @click="triggerImport" class="btn">
+                    📥 Import Favorites
+                </button>
+            </div>
+        </div>
+
+        <!-- Custom Tile Modal -->
+        <div v-if="showCustomTileModal" class="custom-tile-modal" @click="closeCustomTileModal">
+            <div class="custom-tile-form" @click.stop>
+                <h3>{{ editingCustomTile ? 'Edit Custom Tile' : 'Add Custom Tile' }}</h3>
+                <form @submit.prevent="saveCustomTile">
+                    <div class="form-group">
+                        <label>Title *</label>
+                        <input v-model="customTileForm.title" type="text" required placeholder="Service Name">
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea v-model="customTileForm.description" placeholder="Brief description of the service"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>URL *</label>
+                        <input v-model="customTileForm.url" type="url" required placeholder="https://example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Logo URL</label>
+                        <input v-model="customTileForm.logo" type="url" placeholder="https://example.com/logo.png">
+                    </div>
+                    <div class="form-group">
+                        <label>Symbol (emoji)</label>
+                        <input v-model="customTileForm.symbol" type="text" placeholder="🔧" maxlength="2">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" @click="closeCustomTileModal" class="btn">Cancel</button>
+                        <button type="submit" class="btn">{{ editingCustomTile ? 'Update' : 'Add' }} Tile</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Search Modal -->
+        <div v-if="showSearch && !loading && !error" class="search-modal" @click="closeSearch">
+            <div class="search-box" @click.stop>
+                <input 
+                    ref="searchInput"
+                    v-model="searchQuery" 
+                    @keydown="handleSearchKeydown"
+                    class="search-input" 
+                    placeholder="Search services...">
+                <div class="search-results" v-if="filteredServices.length">
+                    <div v-for="(service, index) in filteredServices" 
+                         :key="index"
+                         :class="{ 'search-item': true, 'active': selectedSearchIndex === index }"
+                         @click="openService(service)"
+                         @mouseover="selectedSearchIndex = index">
+                        <strong>{{ service.title }}</strong>
+                        <div class="text-muted small">{{ service.description }}</div>
+                        <div class="text-muted small">{{ service.dashboard }} > {{ resolveUrl(service.url) }}</div>
+                    </div>
+                </div>
+                <div v-else-if="searchQuery" class="search-results">
+                    <div class="search-item text-muted">No services found</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    dashboards: [],
+                    config: {},
+                    selectedDashboard: 0,
+                    showSearch: false,
+                    searchQuery: '',
+                    selectedSearchIndex: 0,
+                    loading: true,
+                    error: null,
+                    isDarkMode: false,
+                    homeTiles: [],
+                    draggingTile: null,
+                    dragOverTile: null,
+                    dragSourceIndex: null,
+                    showCustomTileModal: false,
+                    editingCustomTile: null,
+                    customTileForm: {
+                        title: '',
+                        description: '',
+                        url: '',
+                        logo: '',
+                        symbol: ''
+                    }
+                };
+            },
+            computed: {
+                currentDashboard() {
+                    return this.allDashboards[this.selectedDashboard] || null;
+                },
+                favoritesDashboard() {
+                    const title = this.homeTiles.length > 0 ? "Your Personal Dashboard" : "No Items Yet";
+                    const subtitle = this.homeTiles.length > 0 
+                        ? "Your favorite services and custom links. Drag and drop to reorder." 
+                        : "Star any service tile to add it to your favorites, or create custom tiles for quick access.";
+                    
+                    // Split tiles into rows of maximum 5 tiles each
+                    const rows = [];
+                    const tilesPerRow = 4;
+                    
+                    if (this.homeTiles.length === 0) {
+                        // Show empty state
+                        rows.push({
+                            title: title,
+                            subtitle: subtitle,
+                            "min-width": 4,
+                            tiles: []
+                        });
+                    } else {
+                        // Split tiles into chunks of 5
+                        for (let i = 0; i < this.homeTiles.length; i += tilesPerRow) {
+                            const rowTiles = this.homeTiles.slice(i, i + tilesPerRow);
+                            const isFirstRow = i === 0;
+                            
+                            rows.push({
+                                title: isFirstRow ? title : null,
+                                subtitle: isFirstRow ? subtitle : null,
+                                "max-width": tilesPerRow,
+                                tiles: rowTiles
+                            });
+                        }
+                    }
+                    
+                    return {
+                        name: "Home",
+                        rows: rows
+                    };
+                },
+                allDashboards() {
+                    const dashboards = [...this.dashboards];
+                    dashboards.unshift(this.favoritesDashboard);
+                    return dashboards;
+                },
+                allServices() {
+                    const services = [];
+                    this.allDashboards.forEach(dashboard => {
+                        dashboard.rows.forEach(row => {
+                            row.tiles.forEach(tile => {
+                                services.push({
+                                    ...tile,
+                                    dashboard: dashboard.name
+                                });
+                            });
+                        });
+                    });
+                    return services;
+                },
+                filteredServices() {
+                    if (!this.searchQuery) return [];
+                    const query = this.searchQuery.toLowerCase();
+                    return this.allServices.filter(service => 
+                        service.title.toLowerCase().includes(query) ||
+                        (service.description && service.description.toLowerCase().includes(query)) ||
+                        service.url.toLowerCase().includes(query)
+                    );
+                }
+            },
+            async mounted() {
+                try {
+                    this.initializeTheme();
+                    this.loadHomeTiles();
+                    await this.loadConfiguration();
+                    await this.loadDashboardData();
+                    this.updatePageTitle();
+                    this.setupKeyboardShortcuts();
+                    this.loading = false;
+                } catch (error) {
+                    this.error = error.message;
+                    this.loading = false;
+                }
+            },
+            methods: {
+                async loadConfiguration() {
+                    try {
+                        const response = await fetch('config.json');
+                        if (!response.ok) {
+                            throw new Error(`Failed to load config.json: ${response.status}`);
+                        }
+                        this.config = await response.json();
+                    } catch (error) {
+                        console.error('Failed to load configuration:', error);
+                        throw new Error('Unable to load configuration file (config.json)');
+                    }
+                },
+                resolveUrl(url) {
+                    if (!url) return '';
+                    
+                    // Replace placeholders with config values
+                    let resolvedUrl = url;
+                    Object.keys(this.config).forEach(key => {
+                        const placeholder = `{${key}}`;
+                        resolvedUrl = resolvedUrl.replace(new RegExp(placeholder, 'g'), this.config[key]);
+                    });
+                    
+                    return resolvedUrl;
+                },
+                async loadDashboardData() {
+                    try {
+                        const response = await fetch('dashboard-config.json');
+                        if (!response.ok) {
+                            throw new Error(`Failed to load dashboard-config.json: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        this.dashboards = data.dashboards;
+                    } catch (error) {
+                        console.error('Failed to load dashboard configuration:', error);
+                        throw new Error('Unable to load dashboard configuration file (dashboard-config.json)');
+                    }
+                },
+                setupKeyboardShortcuts() {
+                    document.addEventListener('keydown', (e) => {
+                        if (e.ctrlKey && e.key === 'p' && !this.loading && !this.error) {
+                            e.preventDefault();
+                            this.openSearch();
+                        } else if (e.key === 'Escape' && this.showSearch) {
+                            this.closeSearch();
+                        }
+                    });
+                },
+                openSearch() {
+                    this.showSearch = true;
+                    this.searchQuery = '';
+                    this.selectedSearchIndex = 0;
+                    this.$nextTick(() => {
+                        this.$refs.searchInput.focus();
+                    });
+                },
+                closeSearch() {
+                    this.showSearch = false;
+                },
+                handleSearchKeydown(e) {
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        this.selectedSearchIndex = Math.min(
+                            this.selectedSearchIndex + 1, 
+                            this.filteredServices.length - 1
+                        );
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.selectedSearchIndex = Math.max(this.selectedSearchIndex - 1, 0);
+                    } else if (e.key === 'Enter' && this.filteredServices.length > 0) {
+                        e.preventDefault();
+                        this.openService(this.filteredServices[this.selectedSearchIndex]);
+                    }
+                },
+                openService(service) {
+                    window.open(this.resolveUrl(service.url), '_blank');
+                    this.closeSearch();
+                },
+                getTileClass(tile, row) {
+                    // Special handling for Home page - always use 4 columns
+                    if (this.isHomePage()) {
+                        const colSize = Math.floor(12 / 4); // Always 4 tiles per row width
+                        return `col-md-${colSize} col-sm-6 col-12`;
+                    }
+                    
+                    // Handle max-width (existing logic for limiting tiles per row)
+                    if (row['max-width']) {
+                        const effectiveTilesPerRow = Math.min(row.tiles.length, row['max-width']);
+                        const colSize = Math.floor(12 / effectiveTilesPerRow);
+                        return `col-md-${colSize} col-sm-6 col-12`;
+                    }
+                    
+                    // Handle min-width (new logic for preventing tiles from being too wide)
+                    if (row['min-width']) {
+                        const minTilesPerRow = row['min-width'];
+                        const actualTiles = row.tiles.length;
+                        const effectiveTilesPerRow = Math.max(actualTiles, minTilesPerRow);
+                        const colSize = Math.floor(12 / effectiveTilesPerRow);
+                        return `col-md-${colSize} col-sm-6 col-12`;
+                    }
+                    
+                    // Default behavior: use actual tile count
+                    const colSize = Math.floor(12 / row.tiles.length);
+                    return `col-md-${colSize} col-sm-6 col-12`;
+                },
+                getTileStyle(tile) {
+                    return {};
+                },
+                initializeTheme() {
+                    const savedTheme = localStorage.getItem('dashboard-theme');
+                    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                    
+                    this.isDarkMode = savedTheme === 'dark' || (!savedTheme && prefersDark);
+                    this.applyTheme();
+                },
+                toggleTheme() {
+                    this.isDarkMode = !this.isDarkMode;
+                    this.applyTheme();
+                    localStorage.setItem('dashboard-theme', this.isDarkMode ? 'dark' : 'light');
+                },
+                applyTheme() {
+                    if (this.isDarkMode) {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                    } else {
+                        document.documentElement.removeAttribute('data-theme');
+                    }
+                },
+                loadHomeTiles() {
+                    // Try to load from new format first
+                    const savedHomeTiles = localStorage.getItem('dashboard-home-tiles');
+                    if (savedHomeTiles) {
+                        this.homeTiles = JSON.parse(savedHomeTiles);
+                        return;
+                    }
+                    
+                    // Migration: load from old format if new format doesn't exist
+                    const savedFavorites = localStorage.getItem('dashboard-favorites');
+                    const savedCustomTiles = localStorage.getItem('dashboard-custom-tiles');
+                    
+                    const favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
+                    const customTiles = savedCustomTiles ? JSON.parse(savedCustomTiles) : [];
+                    
+                    // Convert to new format with type property
+                    this.homeTiles = [
+                        ...customTiles.map(tile => ({ ...tile, type: 'custom' })),
+                        ...favorites.map(tile => ({ ...tile, type: 'favorite' }))
+                    ];
+                    
+                    // Save in new format and clean up old storage
+                    this.saveHomeTiles();
+                    localStorage.removeItem('dashboard-favorites');
+                    localStorage.removeItem('dashboard-custom-tiles');
+                },
+                saveHomeTiles() {
+                    localStorage.setItem('dashboard-home-tiles', JSON.stringify(this.homeTiles));
+                },
+                isFavorited(tile) {
+                    return this.homeTiles.some(homeTile => homeTile.type === 'favorite' && homeTile.url === tile.url && homeTile.title === tile.title);
+                },
+                toggleFavorite(tile) {
+                    const index = this.homeTiles.findIndex(homeTile => homeTile.type === 'favorite' && homeTile.url === tile.url && homeTile.title === tile.title);
+                    if (index >= 0) {
+                        this.homeTiles.splice(index, 1);
+                    } else {
+                        this.homeTiles.push({ ...tile, type: 'favorite' });
+                    }
+                    this.saveHomeTiles();
+                },
+                isHomePage() {
+                    return this.selectedDashboard === 0;
+                },
+                getGlobalTileIndex(rowIndex, tileIndex) {
+                    // Calculate the global index in homeTiles array from row and tile indices
+                    if (!this.isHomePage()) return -1;
+                    
+                    const tilesPerRow = 4; // Fixed number of tiles per row for Home page
+                    return (rowIndex * tilesPerRow) + tileIndex;
+                },
+                onDragStart(event, tile, rowIndex, tileIndex) {
+                    if (!this.isHomePage()) return;
+                    
+                    this.draggingTile = tile;
+                    this.dragSourceIndex = this.getGlobalTileIndex(rowIndex, tileIndex);
+                    event.dataTransfer.effectAllowed = 'move';
+                    event.dataTransfer.setData('text/plain', '');
+                },
+                onDragEnd() {
+                    this.draggingTile = null;
+                    this.dragOverTile = null;
+                    this.dragSourceIndex = null;
+                },
+                onDragOver(event, tile, rowIndex, tileIndex) {
+                    if (!this.isHomePage() || !this.draggingTile) return;
+                    
+                    event.preventDefault();
+                    event.dataTransfer.dropEffect = 'move';
+                    this.dragOverTile = tile;
+                },
+                onDragLeave() {
+                    this.dragOverTile = null;
+                },
+                onDrop(event, targetRowIndex, targetTileIndex) {
+                    if (!this.isHomePage() || !this.draggingTile || this.dragSourceIndex === null) return;
+                    
+                    event.preventDefault();
+                    const sourceIndex = this.dragSourceIndex;
+                    const targetIndex = this.getGlobalTileIndex(targetRowIndex, targetTileIndex);
+                    
+                    if (sourceIndex !== targetIndex) {
+                        // Move tile to new position
+                        const [movedTile] = this.homeTiles.splice(sourceIndex, 1);
+                        
+                        // Adjust target index if source was before target
+                        const adjustedTargetIndex = sourceIndex < targetIndex ? targetIndex - 1 : targetIndex;
+                        this.homeTiles.splice(adjustedTargetIndex, 0, movedTile);
+                        
+                        this.saveHomeTiles();
+                    }
+                    
+                    this.onDragEnd();
+                },
+                updatePageTitle() {
+                    document.title = this.config.dashboard_title || 'Service Dashboard';
+                },
+                exportFavorites() {
+                    // For export, save the original template URLs for favorites (not resolved URLs)
+                    const exportTiles = this.homeTiles.map(homeTile => {
+                        if (homeTile.type === 'favorite') {
+                            // Find the original tile in dashboard config to get template URL
+                            let originalTile = null;
+                            this.dashboards.forEach(dashboard => {
+                                dashboard.rows.forEach(row => {
+                                    row.tiles.forEach(tile => {
+                                        if (tile.title === homeTile.title && this.resolveUrl(tile.url) === homeTile.url) {
+                                            originalTile = { ...tile, type: 'favorite' };
+                                        }
+                                    });
+                                });
+                            });
+                            
+                            // If we found the original, use its template URL, otherwise use resolved URL
+                            return originalTile ? originalTile : homeTile;
+                        }
+                        return homeTile; // Custom tiles are exported as-is
+                    });
+                    
+                    const exportData = {
+                        homeTiles: exportTiles,
+                        exportDate: new Date().toISOString(),
+                        version: "2.0"
+                    };
+                    
+                    const blob = new Blob([JSON.stringify(exportData, null, 2)], {
+                        type: 'application/json'
+                    });
+                    
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `dashboard-favorites-${new Date().toISOString().split('T')[0]}.json`;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                },
+                triggerImport() {
+                    // Create a temporary file input element
+                    const input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = '.json';
+                    input.onchange = (event) => {
+                        this.importFavorites(event);
+                    };
+                    input.click();
+                },
+                importFavorites(event) {
+                    const file = event.target.files[0];
+                    if (!file) return;
+                    
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        try {
+                            const data = JSON.parse(e.target.result);
+                            
+                            let importTiles = [];
+                            
+                            // Handle new format (version 2.0+)
+                            if (data.homeTiles && Array.isArray(data.homeTiles)) {
+                                importTiles = data.homeTiles;
+                            }
+                            // Handle old format (version 1.0)
+                            else if (data.favorites && Array.isArray(data.favorites)) {
+                                importTiles = data.favorites.map(item => {
+                                    if (item.isCustom) {
+                                        return { ...item, type: 'custom' };
+                                    }
+                                    return { ...item, type: 'favorite' };
+                                });
+                            } else {
+                                alert('Invalid file format. Please select a valid favorites export file.');
+                                return;
+                            }
+                            
+                            // Process imported tiles
+                            const newHomeTiles = [];
+                            let favoritesCount = 0;
+                            let customCount = 0;
+                            
+                            importTiles.forEach(item => {
+                                if (item.type === 'custom' || item.isCustom) {
+                                    // Custom tile
+                                    newHomeTiles.push({
+                                        ...item,
+                                        type: 'custom',
+                                        id: item.id || Date.now().toString() + Math.random().toString(36).substr(2, 9)
+                                    });
+                                    customCount++;
+                                } else {
+                                    // Favorite tile - check if it matches an existing dashboard service
+                                    let matchingTile = null;
+                                    this.dashboards.forEach(dashboard => {
+                                        dashboard.rows.forEach(row => {
+                                            row.tiles.forEach(tile => {
+                                                // Match by title and either template URL or resolved URL
+                                                if (tile.title === item.title && 
+                                                    (tile.url === item.url || this.resolveUrl(tile.url) === item.url)) {
+                                                    matchingTile = {
+                                                        title: tile.title,
+                                                        url: this.resolveUrl(tile.url),
+                                                        description: tile.description,
+                                                        logo: tile.logo,
+                                                        symbol: tile.symbol,
+                                                        type: 'favorite'
+                                                    };
+                                                }
+                                            });
+                                        });
+                                    });
+                                    
+                                    if (matchingTile) {
+                                        newHomeTiles.push(matchingTile);
+                                        favoritesCount++;
+                                    } else {
+                                        // Treat as custom tile if no match found
+                                        newHomeTiles.push({
+                                            ...item,
+                                            type: 'custom',
+                                            id: item.id || Date.now().toString() + Math.random().toString(36).substr(2, 9)
+                                        });
+                                        customCount++;
+                                    }
+                                }
+                            });
+                            
+                            // Ask for confirmation if user already has data
+                            const totalExisting = this.homeTiles.length;
+                            const totalNew = newHomeTiles.length;
+                            
+                            if (totalExisting > 0) {
+                                const confirmed = confirm(
+                                    `You have ${totalExisting} existing items. ` +
+                                    `Import will replace them with ${totalNew} items (${favoritesCount} favorites, ${customCount} custom tiles) from the file. Continue?`
+                                );
+                                if (!confirmed) {
+                                    return;
+                                }
+                            }
+                            
+                            this.homeTiles = newHomeTiles;
+                            this.saveHomeTiles();
+                            
+                            alert(`Successfully imported ${totalNew} items!\n${favoritesCount} matched existing services (added to favorites)\n${customCount} custom tiles created`);
+                        } catch (error) {
+                            alert('Error reading file. Please select a valid JSON file.');
+                        }
+                    };
+                    
+                    reader.readAsText(file);
+                },
+                closeCustomTileModal() {
+                    this.showCustomTileModal = false;
+                    this.editingCustomTile = null;
+                    this.resetCustomTileForm();
+                },
+                resetCustomTileForm() {
+                    this.customTileForm = {
+                        title: '',
+                        description: '',
+                        url: '',
+                        logo: '',
+                        symbol: ''
+                    };
+                },
+                saveCustomTile() {
+                    const tile = {
+                        ...this.customTileForm,
+                        type: 'custom',
+                        id: this.editingCustomTile?.id || Date.now().toString()
+                    };
+                    
+                    if (this.editingCustomTile) {
+                        const index = this.homeTiles.findIndex(t => t.id === this.editingCustomTile.id);
+                        if (index >= 0) {
+                            this.homeTiles.splice(index, 1, tile);
+                        }
+                    } else {
+                        this.homeTiles.push(tile);
+                    }
+                    
+                    this.saveHomeTiles();
+                    this.closeCustomTileModal();
+                },
+                editCustomTile(tile) {
+                    this.editingCustomTile = tile;
+                    this.customTileForm = { ...tile };
+                    this.showCustomTileModal = true;
+                },
+                deleteCustomTile(tile) {
+                    if (confirm(`Delete custom tile "${tile.title}"?`)) {
+                        const index = this.homeTiles.findIndex(t => t.id === tile.id);
+                        if (index >= 0) {
+                            this.homeTiles.splice(index, 1);
+                            this.saveHomeTiles();
+                        }
+                    }
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
